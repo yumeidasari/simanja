@@ -200,7 +200,7 @@
 	  
       <!--li class="nav-item{{ $activePage == 'map' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('map') }}">
-          <!--i class="material-icons">location_ons</i-->
+          
 		  <lord-icon
 				src="https://cdn.lordicon.com/zzcjjxew.json"
 				trigger="loop"
