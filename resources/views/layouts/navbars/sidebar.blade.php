@@ -25,6 +25,18 @@
             <p>{{ __('Dashboard') }}</p>
         </a>
       </li>
+      <li class="nav-item{{ $activePage == 'map' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('map') }}">
+          <!--i class="material-icons">location_ons</i-->
+		  <lord-icon
+				src="https://cdn.lordicon.com/zzcjjxew.json"
+				trigger="loop"
+				colors="primary:#121331,secondary:#08a88a"
+				style="width:30px;height:30px">
+		  </lord-icon>
+            &nbsp;{{ __('Peta Jaringan FO') }}
+        </a>
+      </li>
       <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#laravelExample" aria-expanded="true">
           <!--i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i-->
@@ -186,7 +198,7 @@
         </a>
       </li-->
 	  
-      <li class="nav-item{{ $activePage == 'map' ? ' active' : '' }}">
+      <!--li class="nav-item{{ $activePage == 'map' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('map') }}">
           <!--i class="material-icons">location_ons</i-->
 		  <lord-icon
@@ -197,7 +209,7 @@
 		  </lord-icon>
             &nbsp;{{ __('Peta Jaringan FO') }}
         </a>
-      </li>
+      </li-->
 	  
       <!--li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('notifications') }}">
