@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ __('SIMANJA - Sistem Informasi Manajemen Aset Jaringan OPD Pemerintah Daerah') }}</title>
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('material') }}/img/apple-icon.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('/storage/img/beltim.png') }}">
     <!--link rel="icon" type="image/png" href="{{ asset('material') }}/img/favicon.png"-->
 	<link rel="icon" type="image/png" href="{{ asset('/storage/img/beltim.png') }}">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
