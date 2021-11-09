@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
-
 use App\Models\Tes;
 use App\Models\RefOPD;
-//use App\Imports\WirelessImports;
-//use App\Exports\WirelessExport;
-//use Excel;
+use App\Models\RefAlat;
+use App\Models\JaringanOpd;
+use App\Imports\OpdImport;
+use App\Exports\OpdExport;
+use Excel;
+use Illuminate\Support\Facades\DB;
 
 
 class TesWifiController extends Controller
@@ -18,50 +18,63 @@ class TesWifiController extends Controller
     //
 	public function index(Request $request)
     {
-		//$semua_user = User::all();
-		//$semua_wireless = Wireless::orderBy('id','DESC')->paginate(5);
 		$cari = $request->get('search');
 
-        $semua_wireless = DB::table('tes')
-						->join('ref_opd', 'tes.id_opd', '=', 'ref_opd.id')
-                        ->select('tes.*', 'ref_opd.*')
-                        ->where('ref_opd.nama_opd', 'LIKE', '%'.$cari.'%')
-						->orwhere('tes.ip_client', 'LIKE', '%'.$cari.'%')
-						->orwhere('tes.ip_router', 'LIKE', '%'.$cari.'%')
-						->orderby('tes.id','desc')
+        $semua_server = DB::table('ref_server')
+                        ->select('ref_server.*')
+                        ->where('ref_server.nama_server', 'LIKE', '%'.$cari.'%')
+						->orwhere('ref_server.model_server', 'LIKE', '%'.$cari.'%')
+						->orderby('ref_server.nama_server','asc')
                         ->paginate(5);
-						
-		$semua_opd 	= RefOPD::all();
 		
-        return view('tes-wifi.index', compact('semua_wireless', 'semua_opd'));
-        //return view('users.index', ['users' => $model->paginate(15)]);
+		$tes_server 	= Tes::all();
+		 
+		$total_server = count($tes_server);
+		
+		if($total_server != 0)
+		{
+			for($i=0; $i < $total_server; $i++)
+			{
+				$vm = DB::table('virtual_machine')
+						->join('ref_alat', 'virtual_machine.id_alat', '=', 'ref_alat.id')
+                        ->select('virtual_machine.*','ref_alat.nama_alat', 'ref_alat.tipe', 'ref_alat.model')
+                        ->where('virtual_machine.server_vm', '=', $tes_server[$i]->nama_server)
+						->get();
+						
+				$jml_vm = count($vm);
+				
+				$tes_server[$i]->jml_host = $jml_vm;
+				$tes_server[$i]->save();
+			}
+		}
+		
+		$host_vm  = DB::table('virtual_machine')
+						->join('ref_alat', 'virtual_machine.id_alat', '=', 'ref_alat.id')
+                        ->select('virtual_machine.*','ref_alat.nama_alat', 'ref_alat.tipe', 'ref_alat.model')
+						->orderby('virtual_machine.server_vm','asc')
+                        ->get();
+		//return response()->json(['data' => $host_vm]);
+        return view('tes-wifi.index', compact('semua_server', 'tes_server', 'host_vm'));
+       
     }
 	
 	public function store(Request $request)
-    {
-        //$this->authorize('kelola-user');
-				
-        $wireless = new Tes;  //--->> new Nama MOdel!!!!
-        $wireless->id_opd=$request->id_opd;
-		$wireless->ip_client=$request->ip_client;
-		$wireless->ip_router=$request->ip_router;
-		$wireless->keterangan = $request->keterangan;        
-        $wireless->save();
-		//return response()->json(['data' => $user]);
-        return redirect()->to('tes-wifi')->with('message','Berhasil menambah Data Wireless');
-    }
+	{
+		$server_baru = new Tes;  //--->> new Nama MOdel!!!!
+		$server_baru->nama_server = $request->nama_server;
+		$server_baru->model_server = $request->model_server;
+		
+		$server_baru->save();
+		
+		return redirect()->to('tes-wifi')->with('message','Berhasil menambah Data Server');
+	}
 	
-	public function update(Request $request, $id)
+	public function destroy($id)
     {
-        $tes_wireless= Tes::findOrFail($id);
-		        
-		$tes_wireless->id_opd=$request->id_opd;
-		$tes_wireless->ip_client=$request->ip_client;
-		$tes_wireless->ip_router=$request->ip_router;
-		$tes_wireless->keterangan = $request->keterangan;        
-        $tes_wireless->save();
-		return response()->json(['data' => $user]);
-        //return redirect()->to('tes-wifi')->with('message','Berhasil update data Wireless');
+       // $this->authorize('kelola-user');
+        $jaringan=JaringanOpd::findOrFail($id);
+        $jaringan->delete();
+        return redirect()->to('perangkat-jaringan-tes')->with('message','Berhasil hapus data Perangkat');
     }
 	
 }
