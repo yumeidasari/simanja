@@ -83,6 +83,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/jaringan-opd/import', 'App\Http\Controllers\JaringanOpdController@processImport')->name('jaringan-opd.import');
 	Route::resource('jaringan-opd', 'App\Http\Controllers\JaringanOpdController', ['except' => ['show']]);
 	
+	Route::get('/perangkat-jaringan-tes/{id}/destroy', 'App\Http\Controllers\TesPerangkatJaringanController@destroy');
+	Route::resource('perangkat-jaringan-tes', 'App\Http\Controllers\TesPerangkatJaringanController', ['except' => ['show']]);
 	//-----------
 	Route::get('/wireless/export', 'App\Http\Controllers\WirelessController@processExport')->name('wireless.export');
 	Route::get('/wireless/import', 'App\Http\Controllers\WirelessController@import');

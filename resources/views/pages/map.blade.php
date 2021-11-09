@@ -110,7 +110,7 @@
           
           //angka 0 pada link file kml kalian di ganti angka 1 agar file kmlnya bisa tampil.
 
-          url: 'https://www.dropbox.com/s/dfy6yxmrl60bxlp/map_fo2.kml?dl=1',
+          url: 'https://www.dropbox.com/s/lim1h80voa5x2ui/map_fo_fix.kml?dl=1',
           zoom:18,
           map: map
       });

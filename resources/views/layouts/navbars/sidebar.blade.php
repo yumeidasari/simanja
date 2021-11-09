@@ -10,7 +10,7 @@
     </a-->
 	<center>
 	<a href="home" class="brand-link">
-		<img width="50px" src="{{ asset('/storage/img/beltim.png') }}" alt="Sipakcamar Logo" class="brand-image img-circle elevation-3"
+		<img width="50px" src="{{ asset('/storage/img/beltim.png') }}" alt="Simanja Logo" class="brand-image img-circle elevation-3"
 		style="opacity: .8">
 		<br>
 		<h3><b>{{ __('SIMANJA') }}</b></h3>
@@ -23,6 +23,18 @@
         <a class="nav-link" href="{{ route('home') }}">
           <i class="material-icons">dashboard</i>
             <p>{{ __('Dashboard') }}</p>
+        </a>
+      </li>
+	  <li class="nav-item{{ $activePage == 'map' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('map') }}">
+          <!--i class="material-icons">location_ons</i-->
+		  <lord-icon
+				src="https://cdn.lordicon.com/zzcjjxew.json"
+				trigger="loop"
+				colors="primary:#121331,secondary:#08a88a"
+				style="width:30px;height:30px">
+		  </lord-icon>
+            &nbsp;{{ __('Peta Jaringan FO') }}
         </a>
       </li>
       <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
@@ -47,6 +59,7 @@
                 &nbsp;{{ __('User profile') }} 
               </a>
             </li>
+			 @if(\Gate::allows('ADMIN'))
             <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('user.index') }}">
                 <!--i class="material-icons">people_alt</i-->
@@ -59,11 +72,12 @@
                 &nbsp;{{ __('Manajemen User') }} 
               </a>
             </li>
+			@endif
           </ul>
         </div>
       </li>
 	  
-	  <li class="nav-item {{ ( $activePage == 'aplikasi' || $activePage == 'jaringan-opd' || $activePage == 'wireless' || $activePage == 'vm') ? ' active' : '' }}">
+	  <li class="nav-item {{ ( $activePage == 'perangkat-jaringan-tes' || $activePage == 'aplikasi' || $activePage == 'jaringan-opd' || $activePage == 'wireless' || $activePage == 'vm') ? ' active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#dataAset" aria-expanded="true">
           <!--i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i-->
 		  <!--i class="material-icons">table_view</i-->
@@ -86,9 +100,8 @@
               </a>
             </li>
 			
-            <li class="nav-item{{ $activePage == 'jaringan-opd' ? ' active' : '' }}">
+            <!--li class="nav-item{{ $activePage == 'jaringan-opd' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('jaringan-opd.index') }}">
-                <!--i class="material-icons">mediation</i-->
 				<lord-icon
 					src="https://cdn.lordicon.com/ybfcwnqv.json"
 					trigger="loop"
@@ -96,6 +109,18 @@
 					style="width:30px;height:30px">
 				</lord-icon>
                  &nbsp;{{ __('Peralatan Jaringan') }} 
+              </a>
+            </li-->
+			<li class="nav-item{{ $activePage == 'jaringan-opd' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('perangkat-jaringan-tes.index') }}">
+                <!--i class="material-icons">mediation</i-->
+				<lord-icon
+					src="https://cdn.lordicon.com/ybfcwnqv.json"
+					trigger="loop"
+					colors="primary:#121331,secondary:#08a88a"
+					style="width:30px;height:30px">
+				</lord-icon>
+                 &nbsp;{{ __('Perangkat jaringan') }} 
               </a>
             </li>
 			<li class="nav-item{{ $activePage == 'wireless' ? ' active' : '' }}">
@@ -186,18 +211,7 @@
         </a>
       </li-->
 	  
-      <li class="nav-item{{ $activePage == 'map' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('map') }}">
-          <!--i class="material-icons">location_ons</i-->
-		  <lord-icon
-				src="https://cdn.lordicon.com/zzcjjxew.json"
-				trigger="loop"
-				colors="primary:#121331,secondary:#08a88a"
-				style="width:30px;height:30px">
-		  </lord-icon>
-            &nbsp;{{ __('Peta Jaringan FO') }}
-        </a>
-      </li>
+      
 	  
       <!--li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('notifications') }}">
