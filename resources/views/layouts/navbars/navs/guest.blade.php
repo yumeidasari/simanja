@@ -3,7 +3,7 @@
   <div class="container">
     <div class="navbar-wrapper">
       <a class="navbar-brand" href="{{ route('home') }}">
-		<img width="50px" src="{{ asset('/storage/img/beltim.png') }}" alt="Simapda Logo" class="brand-image img-circle elevation-3"
+		<img width="50px" src="{{ asset('/storage/img/beltim.png') }}" alt="Simanja Logo" class="brand-image img-circle elevation-3"
 		style="opacity: .8">
 		<b>{{ __('SIMANJA') }}</b>
 	  </a>

@@ -109,7 +109,7 @@
 			  
 			  <div class="card-footer ml-auto mr-auto">
                 <button type="submit" class="btn btn-primary">{{ __('Simpan') }}</button>
-				<a href="{{url('jaringan-opd')}}" class="btn btn-warning">Batal</a>
+				<a href="{{url('perangkat-jaringan-tes')}}" class="btn btn-warning">Batal</a>
               </div>
 			  
             </div> <!--card-->

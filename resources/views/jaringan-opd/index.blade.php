@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'jaringan-opd', 'titlePage' => __('Perangkat Jaringan')])
+@extends('layouts.app', ['activePage' => 'jaringan-opd', 'titlePage' => __('Perangkat Jaringan -> View All')])
 
 @section('content')
 
@@ -22,8 +22,8 @@
 			@endif
                 <div class="card">
                     <div class="card-header card-header-rose">
-                        <h4 class="card-title ">{{ __('Perangkat Jaringan') }}</h4>
-                        <p class="card-category">{{ __('Form untuk mengelola data Peralatan yang digunakan') }}</p>
+                        <h4 class="card-title ">{{ __('Perangkat Jaringan -> View All') }}</h4>
+                        <p class="card-category">{{ __('Form untuk mengelola Semua data Peralatan yang digunakan') }}</p>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -251,7 +251,9 @@
                             </table>
 							<th colspan="10">{{$semua_jaringan->links()}}</th>
                         </div>
+						<a href="{{url('perangkat-jaringan-tes')}}" class="btn btn-warning"> << Kembali</a>
                     </div>
+					
                 </div> <!--end card-->
                 
             </div>
