@@ -154,17 +154,17 @@
 										</th>
                                         
 										<th>
-                                            <b>Nama VM</b>
+                                            <b>Host</b>
                                         </th>
 										<th>
-                                            <b>Tipe</b>
+                                            <b>Jenis Server</b>
                                         </th>
 										<th>
-                                            <b>IP VM</b>
+                                            <b>IP Host</b>
                                         </th>
 										
 										<th>
-                                            <b>OS VM</b>
+                                            <b>OS</b>
                                         </th>
 										
 										<th>

@@ -53,7 +53,7 @@
 								</form>
 								
 							</div>
-							<div class="col-5">
+							<div class="col-4">
 							<!-- IMPORT FILE -->	
 								<!--form action="{{route('opd.import')}}" method="post" enctype="multipart/form-data">
 							    @csrf
@@ -62,7 +62,7 @@
 							    </form-->
 							<!--END -->
 							</div>
-                            <div class="col-2 text-right">
+                            <div class="col-3 text-right">
 								 <a title="tambah data server" href="#" class="btn btn-sm btn-rose" data-toggle="modal" data-target="#modalTambahServer">
 									<i class="material-icons">add</i>
 									<div class="ripple-container"></div>
@@ -194,14 +194,14 @@
 																</div>
 																<div class="col-3 text-right">
 																
-																	<a  title="Edit" href='#' class="btn btn-warning btn-link" data-original-title="" title="">
+																	<!--a  title="Edit" href='{{url("vm/$row->id/edit")}}' class="btn btn-warning btn-link" data-original-title="" title="">
 																		<i class="material-icons">edit</i>
 																		<div class="ripple-container"></div>
 																	</a>
-																	<a  title="Hapus" href="#" class="btn btn-danger btn-link" >
+																	<a  title="Hapus" href="{{url("/tes-wifi/$row->id/destroy")}}" class="btn btn-danger btn-link" >
 																		<i class="material-icons">delete</i>
 																		<div class="ripple-container"></div>
-																	</a>
+																	</a-->
 																</div>
 															</div><!--end row-->
 															<hr>
