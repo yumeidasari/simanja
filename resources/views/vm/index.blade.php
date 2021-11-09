@@ -303,6 +303,7 @@
                             </table>
 							{{$semua_vm->links()}}
                         </div>
+						<a href="{{url('tes-wifi')}}" class="btn btn-warning"> << Kembali</a>
                     </div>
                 </div> <!--end card-->
                 
@@ -312,4 +313,3 @@
 </div> <!--end content-->
 
 @endsection
-

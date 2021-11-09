@@ -137,7 +137,7 @@
             </li>
 			
 			<li class="nav-item{{ $activePage == 'vm' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('vm.index') }}">
+              <a class="nav-link" href="{{ route('tes-wifi.index') }}">
                 <!--i class="material-icons">mediation</i-->
 				<lord-icon
 					src="https://cdn.lordicon.com/wrprwmwt.json"
@@ -145,7 +145,7 @@
 					colors="primary:#121331,secondary:#08a88a"
 					style="width:30px;height:30px">
 				</lord-icon>
-                &nbsp;&nbsp;{{ __('Virtual Mesin') }} 
+                &nbsp;&nbsp;{{ __('Server') }} 
               </a>
             </li>
           </ul>

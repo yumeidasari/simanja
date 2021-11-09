@@ -8,12 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Tes extends Model
 {
     use HasFactory;
-	protected $table='tes';
+	protected $table='ref_server';
 	
-	protected $fillable = ['id_opd', 'ip_client', 'ip_router', 'keterangan'];
+	protected $fillable = ['nama_server', 'model_server', 'jml_host'];
 	
-	public function opd()
-    {
-        return $this->belongsTo('App\Models\RefOPD', 'id_opd');
-    }
 }
