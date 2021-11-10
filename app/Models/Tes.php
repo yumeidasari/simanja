@@ -11,5 +11,6 @@ class Tes extends Model
 	protected $table='ref_server';
 	
 	protected $fillable = ['nama_server', 'model_server', 'jml_host'];
-	
+
 }
+
