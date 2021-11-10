@@ -41,7 +41,7 @@
 					style="width:60px;height:60px">
 				</lord-icon>
               </div>
-              <p class="card-category">Total<br>Peralatan Jaringan</p>
+              <p class="card-category"><br>Peralatan Jaringan</p>
               <h3 class="card-title">{{$jml_jaringan}}</h3>
             </div>
             <!--div class="card-footer">
