@@ -72,9 +72,11 @@ class TesWifiController extends Controller
 	public function destroy($id)
     {
        // $this->authorize('kelola-user');
-        $jaringan=JaringanOpd::findOrFail($id);
+
+        $vm=JaringanOpd::findOrFail($id);
         $jaringan->delete();
-        return redirect()->to('perangkat-jaringan-tes')->with('message','Berhasil hapus data Perangkat');
+        return redirect()->to('tes-wifi')->with('message','Berhasil hapus data Host');
+
     }
 	
 }
