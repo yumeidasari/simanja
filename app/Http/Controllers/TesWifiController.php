@@ -78,6 +78,7 @@ class TesWifiController extends Controller
 	public function destroy($id)
     {
        // $this->authorize('kelola-user');
+
         $hapus_server=Tes::findOrFail($id);
 		
 		$semua_vm = DB::table('virtual_machine')
@@ -90,6 +91,7 @@ class TesWifiController extends Controller
 		$hapus_server->delete();
 		//return response()->json(['data' => $semua_vm]);
         return redirect()->to('tes-wifi')->with('message','Berhasil hapus data Server');
+
     }
 	
 }
