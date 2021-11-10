@@ -138,6 +138,7 @@
 												<div class="card">
 													<div class="card-header card-header-rose">
 														<h4 class="card-title ">{{ __('Delete OPD') }}</h4>
+														<p class="card-category">{{ __('!! Jika data dihapus, maka data yang memiliki relasi dengan data ini juga akan dihapus !!') }}</p>
 													</div>
 												</div>
 												<div class="modal-body">
