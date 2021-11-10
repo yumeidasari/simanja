@@ -16,6 +16,8 @@ class VmImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
+		
+		
 		$alat = RefAlat::where("nama_alat", $row['nama_alat'])
 				->where("model", $row['model'])
 				->first();	
@@ -32,9 +34,9 @@ class VmImport implements ToModel, WithHeadingRow
 		
 		$vm = new Vm;
 		$vm->id_alat = $alat->id;
-		$vm->nama_vm = $row['nama_vm'];
-		$vm->ip_vm = $row['ip_vm'];
-		$vm->os_vm = $row['os_vm'];
+		$vm->nama_vm = $row['nama_host'];
+		$vm->ip_vm = $row['ip_host'];
+		$vm->os_vm = $row['os_host'];
 		$vm->server_vm= $row['server_vm'];
 		$vm->save();
 		//dd($wireless->all());

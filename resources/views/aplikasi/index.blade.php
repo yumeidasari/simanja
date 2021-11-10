@@ -49,8 +49,10 @@
                                   <input type="file" name="file" >
 								  <input type="submit" value="Import" class="btn btn-sm btn-rose">
 							    </form>
+								
 							<!--END -->
 							</div>
+							
 							<div class="col-5">
 							<!--Form pencarian -->
 								<form action="{{url('aplikasi')}}" method="GET">
@@ -191,6 +193,67 @@
 							<!--end Modal-->
 							
                         </div>
+						
+						<div class="row">
+							<div class="col-5">
+								<a title="catatan" href='#' class="btn btn-sm btn-default" data-toggle="modal" data-target="#modalTampilCatatan">
+									<i class="material-icons">help</i>
+									Petunjuk untuk Import
+									<div class="ripple-container"></div>
+								</a>
+							</div>
+							<!-- modal Tampil Catatan -->
+									<div class="modal fade bd-example-modal-lg" id="modalTampilCatatan" tabindex="-1" aria-labelledby="modalTampilCatatan" aria-hidden="true">
+										<div class="modal-dialog modal-lg">
+											<div class="modal-content">
+												<div class="card">
+													<div class="card-header card-header-rose">
+														<h4 class="card-title ">{{ __('Petunjuk Import Data Aplikasi') }}</h4>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-1">
+													</div>
+													<div class="col">
+															<b>1. Untuk Header pada File Excel yang akan diimport atributnya :</b><br>
+																nama_opd
+																<br>
+																nama_aplikasi
+																<br>
+																letak_server
+																<br>
+																link_repo
+																<br>
+																domain_url
+																<br>
+																domain_ip
+																<br>
+																jenis_layanan  (Fieldnya diisi dengan 'LOKAL' atau 'PUBLIK')
+																<br>
+																fungsi
+																<br>
+																platform  (Fieldnya diisi dengan 'WEB' atau 'DESKTOP)
+																<br>
+																versi
+																<br>
+																pengembang
+																<br>
+																bhs_pemrograman
+																<br>
+															
+															<b>2. Semua atribut harus diisi (tidak boleh kosong) </b>
+													</div>
+												</div>											
+												<div class="modal-footer  ml-auto mr-auto">
+													
+														<button type="button" class="btn btn-warning" data-dismiss="modal">OK</button>
+													
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- end modal-->
+						</div>
 						<hr>
                         <div class="table-responsive">
                             <table class="table">

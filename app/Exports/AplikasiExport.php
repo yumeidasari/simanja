@@ -19,13 +19,13 @@ class AplikasiExport implements FromCollection, WithHeadings, ShouldAutoSize
         //return Aplikasi::all();
 		$aplikasi = DB::table('aplikasi')
 						->join('ref_opd', 'aplikasi.id_opd', '=', 'ref_opd.id')
-                        ->select('aplikasi.id',
-								'aplikasi.nama_aplikasi', 
+                        ->select('aplikasi.nama_aplikasi', 
 								'ref_opd.nama_opd',
 								'aplikasi.domain_url',
 								'aplikasi.domain_ip',
-								'aplikasi.link_repo')
-                        ->orderby('aplikasi.id','desc')
+								'aplikasi.link_repo'
+								)
+                        ->orderby('aplikasi.nama_aplikasi','asc')
                         ->get();
 		
 		return $aplikasi;
@@ -34,7 +34,6 @@ class AplikasiExport implements FromCollection, WithHeadings, ShouldAutoSize
 	public function headings():array
 	{
 		return[
-			'ID',
 			'NAMA APLIKASI',
 			'OPD PENGGUNA',
 			'URL',

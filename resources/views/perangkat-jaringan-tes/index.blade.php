@@ -124,7 +124,9 @@
 													</div><!--end row-->
 													<hr>
 													@php $i=1 @endphp
+
 													@foreach($perangkat as $row)
+
 														@if($row->id_opd == $record->id)
 															<div class="row">
 																<div class="col">

@@ -28,7 +28,7 @@ class WirelessController extends Controller
 						->orwhere('wireless.ip_client', 'LIKE', '%'.$cari.'%')
 						->orwhere('wireless.ip_router', 'LIKE', '%'.$cari.'%')
 						->orwhere('ref_opd.nama_opd', 'LIKE', '%'.$cari.'%')
-						->orderby('wireless.id','desc')
+						->orderby('ref_opd.nama_opd','asc')
                         ->paginate(5);
 						
 		$semua_opd 	= RefOPD::all();
