@@ -123,11 +123,12 @@
 														</div>
 													</div><!--end row-->
 													<hr>
+													@php $i=1 @endphp
 													@foreach($perangkat as $no=>$row)
 														@if($row->id_opd == $record->id)
 															<div class="row">
 																<div class="col">
-																	{{++$no}}
+																	{{$i++}}
 																</div>
 																<div class="col">
 																	{{ $row->nama_alat }}

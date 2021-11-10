@@ -116,7 +116,7 @@ class AplikasiController extends Controller
 		$request->validate([
 			"file" => "required|file|mimes:xls,xlsx|max:10000"
 		]);
-
+		
 		Excel::import(new AplikasiImport, $request->file);
 		//return response()->json(['data' => $request]);
 		return redirect()->to('aplikasi')->with('message', 'Data Aplikasi berhasil diimport');
@@ -127,6 +127,7 @@ class AplikasiController extends Controller
 	{		
 		return Excel::download(new AplikasiExport, 'aplikasi.xlsx');
 	}
+	
 	
 	
 }

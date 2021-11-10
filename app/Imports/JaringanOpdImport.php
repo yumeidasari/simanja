@@ -17,34 +17,40 @@ class JaringanOpdImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-		$opd = RefOPD::where("nama_opd", $row['nama_opd'])->first();	
+		$nama_opd = strtoupper($row['nama_opd']);
+		$nama_alat= strtoupper($row['nama_alat']);
+		$model_alat = strtoupper($row['model']);
+		$tipe = strtoupper($row['tipe']);
+		
+		
+		$opd = RefOPD::where("nama_opd", $nama_opd)->first();	
 		
 		if(!$opd){
             
             $opd = new RefOPD;
-            $opd->nama_opd = $row['nama_opd'];
+            $opd->nama_opd = $nama_opd;
             $opd->save();
         }
-		
-		$alat = RefAlat::where("nama_alat", $row['nama_alat'])
-				->where("model", $row['model'])
+				
+		$alat = RefAlat::where("nama_alat", $nama_alat)
+				->where("model", $model_alat)
 				->first();	
 		//dd($alat->all());
 		
 		if(!$alat){
             
             $alat = new RefAlat;
-            $alat->nama_alat = $row['nama_alat'];
-			$alat->tipe = $row['tipe'];
-			$alat->model = $row['model'];
+            $alat->nama_alat = $nama_alat;
+			$alat->tipe = $tipe;
+			$alat->model = $model_alat;
             $alat->save();
         }
 		
 		$jaringanOpd = new JaringanOpd;
 		$jaringanOpd->id_opd = $opd->id;
 		$jaringanOpd->id_alat = $alat->id;
-		$jaringanOpd->kondisi = $row['kondisi'];
-		$jaringanOpd->kode_alat = $row['kode_alat'];
+		$jaringanOpd->kondisi = strtoupper($row['kondisi']);
+		$jaringanOpd->kode_alat = strtoupper($row['kode_alat']);
 		$jaringanOpd->save();
 		//dd($wireless->all());
 		

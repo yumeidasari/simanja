@@ -19,12 +19,13 @@ class WirelessImports implements ToModel, WithHeadingRow
 		
     public function model(array $row)
     {
-       	$opd = RefOPD::where("nama_opd", $row['nama_opd'])->first();	
+		$nama_opd = strtoupper($row['nama_opd']);
+       	$opd = RefOPD::where("nama_opd", $nama_opd)->first();	
 		
 		if(!$opd){
             
             $opd = new RefOPD;
-            $opd->nama_opd = $row['nama_opd'];
+            $opd->nama_opd = $nama_opd;
             $opd->save();
         }
 		

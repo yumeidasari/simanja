@@ -16,12 +16,13 @@ class AplikasiImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-		$opd = RefOPD::where("nama_opd", $row['nama_opd'])->first();	
+		$nama_opd = strtoupper($row['nama_opd']);
+		$opd = RefOPD::where("nama_opd", $nama_opd)->first();
 		
 		if(!$opd){
             
             $opd = new RefOPD;
-            $opd->nama_opd = $row['nama_opd'];
+            $opd->nama_opd = $nama_opd;
             $opd->save();
         }
 		
@@ -33,8 +34,8 @@ class AplikasiImport implements ToModel, WithHeadingRow
 		$aplikasi->domain_ip	=$row['domain_ip'];
 		$aplikasi->domain_url	=$row['domain_url'];
 		$aplikasi->fungsi		=$row['fungsi'];
-		$aplikasi->jenis_layanan=$row['jenis_layanan'];
-		$aplikasi->platform		=$row['platform'];
+		$aplikasi->jenis_layanan=strtoupper($row['jenis_layanan']);
+		$aplikasi->platform		=strtoupper($row['platform']);
 		$aplikasi->versi		=$row['versi'];
 		$aplikasi->pengembang	=$row['pengembang'];
 		$aplikasi->bhs_pemrograman=$row['bhs_pemrograman'];
