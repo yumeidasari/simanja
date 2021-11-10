@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RefOPD;
+use App\Models\Wireless;
+use App\Models\Aplikasi;
+use App\Models\JaringanOpd;
 use App\Imports\OpdImport;
 use App\Exports\OpdExport;
 use Excel;
@@ -65,6 +68,23 @@ class OpdController extends Controller
     {
        // $this->authorize('kelola-user');
         $opd=RefOPD::findOrFail($id);
+		//----------Alamat IP
+		$semua_wireless = DB::table('wireless')
+						->select('wireless.*')
+                        ->where('wireless.id_opd', '=', $opd->id)
+						->delete();
+						
+		//----------Aplikasi
+		$semua_aplikasi = DB::table('aplikasi')
+						->select('aplikasi.*')
+                        ->where('aplikasi.id_opd', '=', $opd->id)
+						->delete();
+						
+		//----------Perangkat JaringanOpd
+		$semua_jaringan = DB::table('jaringan_opd')
+						->select( 'jaringan_opd.*')
+                        ->where('jaringan_opd.id_opd', '=', $opd->id)
+						->delete();
         $opd->delete();
         return redirect()->to('opd')->with('message','Berhasil hapus data OPD');
     }

@@ -100,19 +100,19 @@
 											</div>
 											
 											<div class="form-group">
-												<label for="">Nama VM</label>
+												<label for="">Nama Host</label>
 												<br>
 												<input type="text" class="form-control" id="nama_vm" name="nama_vm" aria-describedby="emailHelp">
 											</div>
 											
 											<div class="form-group">
-												<label for="">IP VM</label>
+												<label for="">IP</label>
 												<br>
 												<input type="text" class="form-control" id="ip_vm" name="ip_vm" aria-describedby="emailHelp">
 											</div>
 																					
 											<div class="form-group">
-												<label for="">OS VM</label>
+												<label for="">OS</label>
 												<br>
 												<input type="text" class="form-control" id="os_vm" name="os_vm" aria-describedby="emailHelp">
 											</div>
@@ -255,19 +255,19 @@
 											   </div>
 											
 											   <div class="form-group">
-												<label for="">Nama VM</label>
+												<label for="">Nama Host</label>
 												<br>
 												<input type="text" class="form-control" id="nama_vm" name="nama_vm" value="{{$record->nama_vm}}" aria-describedby="emailHelp">
 											   </div>
 											
 											   <div class="form-group">
-												<label for="">IP VM</label>
+												<label for="">IP</label>
 												<br>
 												<input type="text" class="form-control" id="ip_vm" name="ip_vm" value="{{$record->ip_vm}}" aria-describedby="emailHelp">
 											   </div>
 																					
 											   <div class="form-group">
-												<label for="">OS VM</label>
+												<label for="">OS</label>
 												<br>
 												<input type="text" class="form-control" id="os_vm" name="os_vm" value="{{$record->os_vm}}" aria-describedby="emailHelp">
 											   </div>

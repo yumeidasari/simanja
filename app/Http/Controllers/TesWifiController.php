@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Tes;
 use App\Models\RefOPD;
 use App\Models\RefAlat;
+use App\Models\Vm;
 use App\Models\JaringanOpd;
 use App\Imports\OpdImport;
 use App\Exports\OpdExport;
@@ -60,6 +61,11 @@ class TesWifiController extends Controller
 	
 	public function store(Request $request)
 	{
+		$request->validate([
+            "nama_server" 	=> "required",
+            "model_server" 	=> "required"
+            
+        ]);
 		$server_baru = new Tes;  //--->> new Nama MOdel!!!!
 		$server_baru->nama_server = $request->nama_server;
 		$server_baru->model_server = $request->model_server;
@@ -73,9 +79,18 @@ class TesWifiController extends Controller
     {
        // $this->authorize('kelola-user');
 
-        $vm=JaringanOpd::findOrFail($id);
-        $jaringan->delete();
-        return redirect()->to('tes-wifi')->with('message','Berhasil hapus data Host');
+        $hapus_server=Tes::findOrFail($id);
+		
+		$semua_vm = DB::table('virtual_machine')
+						->select('virtual_machine.*')
+						->where('virtual_machine.server_vm', '=', $hapus_server->nama_server)
+                        ->delete(); 
+		
+		//$hitung_vm = count($semua_vm);
+		
+		$hapus_server->delete();
+		//return response()->json(['data' => $semua_vm]);
+        return redirect()->to('tes-wifi')->with('message','Berhasil hapus data Server');
 
     }
 	

@@ -2,12 +2,11 @@
 
 @section('content')
 <style>
-
 /* Important part */
 .modal-dialog{
     overflow-y: initial !important
 }
-.modal-body{
+.modal1-body{
     height: 80vh;
     overflow-y: auto;
 }
@@ -54,9 +53,7 @@
 								</form>
 								
 							</div>
-
 							<div class="col-4">
-
 							<!-- IMPORT FILE -->	
 								<!--form action="{{route('opd.import')}}" method="post" enctype="multipart/form-data">
 							    @csrf
@@ -65,9 +62,7 @@
 							    </form-->
 							<!--END -->
 							</div>
-
                             <div class="col-3 text-right">
-
 								 <a title="tambah data server" href="#" class="btn btn-sm btn-rose" data-toggle="modal" data-target="#modalTambahServer">
 									<i class="material-icons">add</i>
 									<div class="ripple-container"></div>
@@ -138,6 +133,9 @@
 										<th>
                                             <b>Jumlah Host</b>
                                         </th>
+										<th class="text-right">
+                                            <b>Actions</b>
+                                        </th>
                                         
                                     </tr>
                                 </thead>
@@ -150,7 +148,12 @@
 										</td>
 										<td>{{ $record->model_server }}</td>
 										<td>{{ $record->jml_host }}</td>
-										
+										<td class="td-actions text-right">
+											<a title="hapus server" title="Hapus" href='#' class="btn btn-danger btn-link" data-toggle="modal" data-target="#modalHapusServer{{ $record->id }}">
+												<i class="material-icons">delete</i>
+												<div class="ripple-container"></div>
+											</a>
+										</td>									
 
 									</tr>
 									<!-- Modal Show Perangkat-->
@@ -162,10 +165,10 @@
 														<h4 class="card-title ">DAFTAR HOST PADA SERVER {{ $record->nama_server }}</h4>
 													</div>
 												</div>
-												<div class="modal-body">
+												<div class="modal1-body">
 													<div class="row text-primary">
-														<div class="col">
-															<b>No.</b>
+														<div class="col-2">
+															<center><b>No.</b></center>
 														</div>
 														<div class="col">
 															<b>Nama Host</b>
@@ -176,17 +179,17 @@
 														<div class="col">
 															<b>OS</b>
 														</div>
-														<div class="col-3">
+														<!--div class="col-3">
 															<center><b>Action</b></center>
-														</div>
+														</div-->
 													</div><!--end row-->
 													<hr>
 													@php $i=1 @endphp
 													@foreach($host_vm as $row)
 														@if($row->server_vm == $record->nama_server)
 															<div class="row">
-																<div class="col">
-																	{{$i++}}
+																<div class="col-2">
+																	<center>{{$i++}}</center>
 																</div>
 																<div class="col">
 																	{{ $row->nama_vm }}
@@ -197,19 +200,17 @@
 																<div class="col">
 																	{{ $row->os_vm }}
 																</div>
-																<div class="col-3 text-right">
+																<!--div class="col-3 text-right">
 																
-
-																	<!--a  title="Edit" href='{{url("vm/$row->id/edit")}}' class="btn btn-warning btn-link" data-original-title="" title="">
+																	<a  title="Edit" href='{{url("vm/$row->id/edit")}}' class="btn btn-warning btn-link" data-original-title="" title="">
 																		<i class="material-icons">edit</i>
 																		<div class="ripple-container"></div>
 																	</a>
 																	<a  title="Hapus" href="{{url("/tes-wifi/$row->id/destroy")}}" class="btn btn-danger btn-link" >
 																		<i class="material-icons">delete</i>
 																		<div class="ripple-container"></div>
-																	</a-->
-
-																</div>
+																	</a>
+																</div-->
 															</div><!--end row-->
 															<hr>
 														@else
@@ -223,6 +224,32 @@
 													
 														<button type="button" class="btn btn-warning" data-dismiss="modal">OK</button>
 													
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- end modal-->
+									<!-- modal hapus VM-->
+									<div class="modal fade" id="modalHapusServer{{ $record->id }}" tabindex="-1" aria-labelledby="modalHapusServer" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="card">
+													<div class="card-header card-header-rose">
+														<h4 class="card-title ">{{ __('Delete Data Server') }}</h4>
+														<p class="card-category">{{ __('!! Jika data dihapus, maka data yang memiliki relasi dengan data ini juga akan dihapus !!') }}</p>
+													</div>
+												</div>
+												<div class="modal-body">
+													<h4 class="text-center">Apakah anda yakin ingin menghapus data Server: <span>{{ $record->nama_server }} ?</span></h4>
+												</div>
+												
+												<div class="modal-footer  ml-auto mr-auto">
+													<form action="{{url("tes-wifi/$record->id")}}" method="post">
+													@csrf
+													@method('delete')
+														<button type="submit" class="btn btn-primary">Hapus data Server!</button>
+														<button type="button" class="btn btn-warning" data-dismiss="modal">Batal</button>
+													</form>
 												</div>
 											</div>
 										</div>
@@ -245,6 +272,4 @@
     </div>  <!-- end container-fluid-->
 </div> <!--end content-->
 
-
 @endsection
-

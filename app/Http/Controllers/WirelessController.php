@@ -40,7 +40,10 @@ class WirelessController extends Controller
 	public function store(Request $request)
     {
         //$this->authorize('kelola-user');
-				
+		$request->validate([
+            "id_opd" => "required"
+            
+        ]);		
         $wireless = new Wireless;  //--->> new Nama MOdel!!!!
         $wireless->id_opd=$request->id_opd;
 		$wireless->ip_client=$request->ip_client;
@@ -55,6 +58,11 @@ class WirelessController extends Controller
 	public function update(Request $request, $id)
     {
         //$this->authorize('kelola-user');
+		$request->validate([
+            "id_opd" => "required"
+            
+        ]);	
+		
 		$wireless=Wireless::findOrFail($id);
 		        
 		$wireless->id_opd=$request->id_opd;

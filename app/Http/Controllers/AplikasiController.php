@@ -30,7 +30,7 @@ class AplikasiController extends Controller
 						->orderby('aplikasi.id','desc')
                         ->paginate(5);
 						
-		$semua_opd = RefOPD::all();
+		$semua_opd = RefOPD::orderby('nama_opd', 'ASC')->get();
 		
         return view('aplikasi.index', compact('semua_aplikasi', 'semua_opd'));
         //return view('users.index', ['users' => $model->paginate(15)]);
