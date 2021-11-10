@@ -2,6 +2,7 @@
 
 @section('content')
 <style>
+
 /* Important part */
 .modal-dialog{
     overflow-y: initial !important
@@ -53,7 +54,9 @@
 								</form>
 								
 							</div>
+
 							<div class="col-4">
+
 							<!-- IMPORT FILE -->	
 								<!--form action="{{route('opd.import')}}" method="post" enctype="multipart/form-data">
 							    @csrf
@@ -62,7 +65,9 @@
 							    </form-->
 							<!--END -->
 							</div>
+
                             <div class="col-3 text-right">
+
 								 <a title="tambah data server" href="#" class="btn btn-sm btn-rose" data-toggle="modal" data-target="#modalTambahServer">
 									<i class="material-icons">add</i>
 									<div class="ripple-container"></div>
@@ -194,6 +199,7 @@
 																</div>
 																<div class="col-3 text-right">
 																
+
 																	<!--a  title="Edit" href='{{url("vm/$row->id/edit")}}' class="btn btn-warning btn-link" data-original-title="" title="">
 																		<i class="material-icons">edit</i>
 																		<div class="ripple-container"></div>
@@ -202,6 +208,7 @@
 																		<i class="material-icons">delete</i>
 																		<div class="ripple-container"></div>
 																	</a-->
+
 																</div>
 															</div><!--end row-->
 															<hr>
@@ -238,4 +245,6 @@
     </div>  <!-- end container-fluid-->
 </div> <!--end content-->
 
+
 @endsection
+
