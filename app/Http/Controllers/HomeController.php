@@ -5,6 +5,7 @@ use App\Models\Aplikasi;
 use App\Models\RefOPD;
 use App\Models\JaringanOpd;
 use App\Models\Wireless;
+use App\Models\LogUser;
 
 class HomeController extends Controller
 {
@@ -23,8 +24,20 @@ class HomeController extends Controller
      *
      * @return \Illuminate\View\View
      */
+	 
+	public function logUser($id_user, $act)
+    {
+        // insert login activity user
+        $log = new LogUser;
+        $log->id_user = $id_user;
+        $log->activity = $act;
+        $log->save();
+    }
+	
     public function index()
-    {	
+    {
+		$this->logUser(auth()->user()->id, 'Login');
+		
 		$opd = RefOPD::all();
 		$jml_opd = count($opd);
 		

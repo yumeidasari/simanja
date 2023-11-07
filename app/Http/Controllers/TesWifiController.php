@@ -19,8 +19,9 @@ class TesWifiController extends Controller
     //
 	public function index(Request $request)
     {
+		
 		$cari = $request->get('search');
-
+		
         $semua_server = DB::table('ref_server')
                         ->select('ref_server.*')
                         ->where('ref_server.nama_server', 'LIKE', '%'.$cari.'%')
@@ -34,6 +35,7 @@ class TesWifiController extends Controller
 		
 		if($total_server != 0)
 		{
+			
 			for($i=0; $i < $total_server; $i++)
 			{
 				$vm = DB::table('virtual_machine')
@@ -43,7 +45,7 @@ class TesWifiController extends Controller
 						->get();
 						
 				$jml_vm = count($vm);
-				
+				//return response()->json(['data' => $vm]);
 				$tes_server[$i]->jml_host = $jml_vm;
 				$tes_server[$i]->save();
 			}
@@ -54,7 +56,8 @@ class TesWifiController extends Controller
                         ->select('virtual_machine.*','ref_alat.nama_alat', 'ref_alat.tipe', 'ref_alat.model')
 						->orderby('virtual_machine.server_vm','asc')
                         ->get();
-		//return response()->json(['data' => $host_vm]);
+
+		
         return view('tes-wifi.index', compact('semua_server', 'tes_server', 'host_vm'));
        
     }

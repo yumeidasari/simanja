@@ -9,7 +9,7 @@
           </a>
         </li>
         <li>
-          <a href="http://diskominfo.belitungtimurkab.go.id" target="_blank">
+          <a href="http://diskominfo.beltim.go.id" target="_blank">
               {{ __('Diskominfo Beltim') }}
           </a>
         </li>
@@ -20,8 +20,8 @@
       &copy;
       <script>
         document.write(new Date().getFullYear())
-      </script>, made with <i class="material-icons">favorite</i> by
-      <a href="https://diskominfo.belitungtimurkab.go.id/" target="_blank">DISKOMINFO Kab. Belitung Timur</a> 
+      </script>
+      <a href="https://diskominfo.beltim.go.id/" target="_blank">Diskominfo Kabupaten Belitung Timur</a> 
     </div>
   </div>
 </footer>

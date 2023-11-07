@@ -1,5 +1,7 @@
 @extends('layouts.app', ['activePage' => 'aplikasi', 'titlePage' => __('Aplikasi')])
-
+@push('css')
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+@endpush
 @section('content')
 <!--script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
@@ -55,7 +57,7 @@
 							
 							<div class="col-5">
 							<!--Form pencarian -->
-								<form action="{{url('aplikasi')}}" method="GET">
+								<!--form action="{{url('aplikasi')}}" method="GET">
                                     
 									<div class="input-group custom-search-form">
 									<input type="text" class="form-control" name="search" placeholder="Search...">
@@ -66,7 +68,7 @@
 									</span>
 									</div>
                     
-								</form>
+								</form-->
 								
 							</div>
                             <div class="col-2 text-right">
@@ -161,6 +163,7 @@
 													<option value="">Pilih Platform</option>
 													<option value="WEB">WEB</option>
 													<option value="DESKTOP">DESKTOP</option>
+													<option value="ANDROID">ANDROID</option>
 												</select>
 											</div>
 											
@@ -256,7 +259,7 @@
 						</div>
 						<hr>
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table align-items-center table-flush" id="tableSearch">
                                 <thead class=" text-primary">
                                     <tr>
 										<th>
@@ -451,15 +454,31 @@
 									
                                 </tbody>
                             </table>
-							{{$semua_aplikasi->links()}}
+							
                         </div>
                     </div>
                 </div> <!--end card-->
                 
             </div>
+			<div class="mt-4 pagination justify-content-center">
+				{{$semua_aplikasi->links()}}
+			</div>
         </div> <!--end row-->
     </div>  <!-- end container-fluid-->
 </div> <!--end content-->
 
 @endsection
+
+@push('js')
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+       
+		$(document).ready(function() {
+            $('#tableSearch').DataTable({
+                pageLength: 25
+            });
+        });
+    </script>
+@endpush
 

@@ -38,7 +38,7 @@
 							</div>
 							<div class="col-5">
 							<!--Form pencarian -->
-								<form action="{{url('jaringan-opd')}}" method="GET">
+								<!--form action="{{url('jaringan-opd')}}" method="GET">
                                     
 									<div class="input-group custom-search-form">
 									<input type="text" class="form-control" name="search" placeholder="Search ...">
@@ -49,7 +49,7 @@
 									</span>
 									</div>
                     
-								</form>
+								</form-->
 								
 							</div>
                             <div class="col-2 text-right">
@@ -178,7 +178,7 @@
 						</div>
 						<hr>
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table align-items-center table-flush" id="tableSearch">
                                 <thead class=" text-primary">
                                     <tr>
 										<th>
@@ -320,5 +320,19 @@
          });
                
   </script>
+  
 @endsection
+@push('js')
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+       
+		$(document).ready(function() {
+            $('#tableSearch').DataTable({
+                pageLength: 25
+            });
+        });
+    </script>
+@endpush
+
 

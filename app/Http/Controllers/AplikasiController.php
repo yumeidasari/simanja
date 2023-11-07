@@ -28,7 +28,7 @@ class AplikasiController extends Controller
 						->orwhere('aplikasi.domain_ip', 'LIKE', '%'.$cari.'%')
 						->orwhere('aplikasi.link_repo', 'LIKE', '%'.$cari.'%')
 						->orderby('aplikasi.id','desc')
-                        ->paginate(5);
+                        ->paginate();
 						
 		$semua_opd = RefOPD::orderby('nama_opd', 'ASC')->get();
 		
