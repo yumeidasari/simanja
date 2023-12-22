@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "doctrine/dbal": "^3.7",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "khill/lavacharts": "^3.1",
@@ -17,7 +18,8 @@
         "laravel/ui": "^3.3",
         "livewire/livewire": "^2.10",
         "maatwebsite/excel": "^3.1",
-        "mediconesystems/livewire-datatables": "^0.10.0"
+        "mediconesystems/livewire-datatables": "^0.10.0",
+        "realrashid/sweet-alert": "^7.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

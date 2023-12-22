@@ -88,12 +88,14 @@
           </p>
         </a>
         <div class="collapse show" id="dataAset">
+		
           <ul class="nav">
+		  @if(\Gate::allows('ADMIN'))
             <li class="nav-item{{ $activePage == 'aplikasi' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('aplikasi.index') }}">
                 <!--i class="material-icons">api</i-->
 				<lord-icon
-					src="https://cdn.lordicon.com/isvvzjbf.json"
+					src="https://cdn.lordicon.com/rpgflpkp.json"
 					trigger="loop"
 					colors="primary:#121331,secondary:#08a88a"
 					style="width:30px;height:30px">
@@ -150,10 +152,24 @@
                 &nbsp;&nbsp;{{ __('Server') }} 
               </a>
             </li>
+		@endif	
+			<li class="nav-item{{ $activePage == 'aset-umum' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('aset-umum.index') }}">
+                <!--i class="material-icons">mediation</i-->
+				<lord-icon
+					src="https://cdn.lordicon.com/xirobkro.json"
+					trigger="loop"
+					colors="primary:#121331,secondary:#08a88a"
+					style="width:30px;height:30px">
+				</lord-icon>
+                &nbsp;&nbsp;{{ __('Aset Umum') }} 
+              </a>
+            </li>
           </ul>
         </div>
       </li>
 	  
+	 @if(\Gate::allows('ADMIN')) 
 	  <li class="nav-item {{ ($activePage == 'opd' || $activePage == 'alat') ? ' active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#dataReferensi" aria-expanded="true">
           <!--i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i-->
@@ -191,7 +207,7 @@
           </ul>
         </div>
       </li>
-	  
+	  @endif
       <!--li class="nav-item{{ $activePage == 'table' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('table') }}">
           <i class="material-icons">content_paste</i>

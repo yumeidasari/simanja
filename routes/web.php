@@ -16,9 +16,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+//Route::get('/form-aset', function () {
+//    return view('form-aset');
+//})->name('form-aset');
 
+Route::get('/form-aset',[App\Http\Controllers\AsetUmumController::class, 'formAset'])->name('form-aset');
+Route::post('/form-aset',[App\Http\Controllers\AsetUmumController::class, 'store'])->name('simpanAsetUmum');
 
-//Auth::routes();
+Auth::routes();
 
 //Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
 
@@ -77,6 +82,11 @@ Route::group(['middleware' => 'auth'], function () {
 	
 	Route::get('/alat/export', 'App\Http\Controllers\AlatController@processExport')->name('alat.export');
 	Route::post('/alat/import', 'App\Http\Controllers\AlatController@processImport')->name('alat.import');
+	Route::any('/alat/detail2/{id}', [App\Http\Controllers\AlatController::class, 'detailAlat'])->name('detailAlat');
+	Route::any('/alat/detail/updt/{id}', [App\Http\Controllers\AlatController::class, 'updateDetail'])->name('updateDetail');
+	Route::any('/alat/detail/del/{id}', [App\Http\Controllers\AlatController::class, 'hapusDetail'])->name('hapusDetail');
+	Route::get('/alat/detail/export',[App\Http\Controllers\AlatController::class, 'exportDetail'])->name('exportDetail');
+	Route::post('/alat/detail/simpan',[App\Http\Controllers\AlatController::class,'storeDetail'])->name('simpanDetailAlat');
 	Route::resource('alat', 'App\Http\Controllers\AlatController', ['except' => ['show']]);
 	
 	Route::get('/jaringan-opd/export', 'App\Http\Controllers\JaringanOpdController@processExport')->name('jaringan-opd.export');
@@ -95,6 +105,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/vm/export', 'App\Http\Controllers\VmController@processExport')->name('vm.export');
 	Route::post('/vm/import', 'App\Http\Controllers\VmController@processImport')->name('vm.import');
 	Route::resource('vm', 'App\Http\Controllers\VmController', ['except' => ['show']]);
+	
+	Route::any('/aset-umum/detail/{id}', [App\Http\Controllers\AsetUmumController::class, 'detailAsetUmum'])->name('detailAsetUmum');
+	Route::any('/aset-umum/update/{id}', [App\Http\Controllers\AsetUmumController::class, 'updateAsetUmum'])->name('updateAsetUmum');
+	Route::resource('aset-umum', 'App\Http\Controllers\AsetUmumController', ['except' => ['show']]);
 	
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);

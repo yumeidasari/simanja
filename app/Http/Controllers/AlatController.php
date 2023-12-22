@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\RefAlat;
 use App\Imports\AlatImport;
 use App\Exports\AlatExport;
+use App\Models\DetailAlat;
+use App\Exports\DetailAlatExport;
+use App\Models\UnitKerja;
 use Excel;
 use Illuminate\Support\Facades\DB;
 
@@ -99,4 +102,63 @@ class AlatController extends Controller
 	{		
 		return Excel::download(new AlatExport, 'alat.xlsx');
 	}
+	
+	public function detailAlat($id){
+		//return response()->json(['data' => $id]);
+		$data = RefAlat::findOrFail($id);
+		$detil = DB::table('detail_alat')
+							->join('ref_alat', 'ref_alat.id', '=', 'detail_alat.id_alat')
+							->select('detail_alat.*')
+							->where('detail_alat.id_alat', $id)
+							->paginate();
+		
+		return view('alat.detail_alat', compact('data', 'detil'));
+	}
+	
+	public function storeDetail(Request $request)
+    {
+        //$this->authorize('kelola-user');
+				
+        $alat = new DetailAlat; 
+        $alat->tgl_pengadaan=$request->tgl_pengadaan;
+		$alat->jumlah=$request->jumlah;
+		$alat->harga=$request->harga;
+		$alat->createdBy = auth()->user()->id;
+		$alat->id_alat = $request->id_alat;
+        
+        $alat->save();
+		//return response()->json(['data' => $user]);
+        return redirect()->to('alat')->with('message','Berhasil menambah Data Detail Peralatan Jaringan');
+    }
+	
+	public function updateDetail(Request $request, $id)
+	{
+		$alat=DetailAlat::findOrFail($id);
+		        
+        $alat->tgl_pengadaan=$request->tgl_pengadaan;
+		$alat->jumlah=$request->jumlah;
+		$harga = trim($request->harga, "Rp. ");
+		$alat->harga= $harga;
+		$alat->updatedBy = auth()->user()->id;
+        
+        $alat->save();
+		return redirect()->to('alat')->with('message','Berhasil update data detail Peralatan Jaringan');
+	}
+	
+	public function hapusDetail($id)
+	{
+		$alat=DetailAlat::findOrFail($id);
+        $alat->delete();
+        return redirect()->to('alat')->with('message','Berhasil hapus data Detail Peralatan Jaringan');
+	}
+	
+	public function exportDetail()
+	{		
+		return Excel::download(new DetailAlatExport, 'detail-alat.xlsx');
+	}
+		
+	public static function encryptId($id)
+    {
+        return $id . 'z' . md5($id);
+    }
 }

@@ -46,6 +46,9 @@
                                         <th>
                                             Email
                                         </th>
+										<th>
+                                            Role
+                                        </th>
                                         <th>
                                             Creation date
                                         </th>
@@ -60,6 +63,7 @@
 										<td> {{++$no + ($semua_user->currentPage()-1) * $semua_user->perPage()}}</td>
 										<td>{{ $record->name }}</td>
 										<td>{{ $record->email }}</td>
+										<td>{{ $record->role }}</td>
 										<td>{{ $record->created_at }}</td>
 										<td class="td-actions text-right">
 											<a rel="tooltip" href='{{url("user/$record->id/edit")}}' class="btn btn-warning btn-link" data-original-title="" title="">

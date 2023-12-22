@@ -26,6 +26,7 @@
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 	<!--- Jquery-->
 	
+	
     </head>
     <body class="{{ $class ?? '' }}">
         @auth()
@@ -167,7 +168,7 @@
 		<script src="http://maps.googleapis.com/maps/api/js"></script>
 		<!--script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnjlDXASsyIUKAd1QANakIHIM8jjWWyNU"
             type="text/javascript"></script-->
-
+		
         @stack('js')
     </body>
 </html>

@@ -13,13 +13,19 @@ class AlterTableVirtualMachine extends Migration
      */
     public function up()
     {
-        Schema::table('virtual_machine', function (Blueprint $table) {
+		Schema::table('ref_alat', function (Blueprint $table) {
+			$table->id()->change();
+		});
+     /*
+		Schema::table('virtual_machine', function (Blueprint $table) {
             
 			$table->unsignedInteger('id_alat')->nullable()->after('id');
             $table->foreign('id_alat')->references('id')->on('ref_alat');
 			
 			
         });
+		
+	*/
     }
 
     /**
@@ -29,11 +35,13 @@ class AlterTableVirtualMachine extends Migration
      */
     public function down()
     {
+		/*
         Schema::table('virtual_machine', function (Blueprint $table) {
             $table->dropForeign('virtual_machine_id_alat_foreign');
             $table->dropColumn('id_alat');
             
            
         });
+		*/
     }
 }
