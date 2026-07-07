@@ -20,8 +20,6 @@ Route::get('/', function () {
 //    return view('form-aset');
 //})->name('form-aset');
 
-Route::get('/form-aset',[App\Http\Controllers\AsetUmumController::class, 'formAset'])->name('form-aset');
-Route::post('/form-aset',[App\Http\Controllers\AsetUmumController::class, 'store'])->name('simpanAsetUmum');
 
 Auth::routes();
 
@@ -106,6 +104,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/vm/import', 'App\Http\Controllers\VmController@processImport')->name('vm.import');
 	Route::resource('vm', 'App\Http\Controllers\VmController', ['except' => ['show']]);
 	
+	// Form Aset Diskominfo (sekarang wajib login)
+	Route::get('/form-aset',[App\Http\Controllers\AsetUmumController::class, 'formAset'])->name('form-aset');
+	Route::post('/form-aset',[App\Http\Controllers\AsetUmumController::class, 'store'])->name('simpanAsetUmum');
+	
 	Route::any('/aset-umum/detail/{id}', [App\Http\Controllers\AsetUmumController::class, 'detailAsetUmum'])->name('detailAsetUmum');
 	Route::any('/aset-umum/update/{id}', [App\Http\Controllers\AsetUmumController::class, 'updateAsetUmum'])->name('updateAsetUmum');
 	Route::resource('aset-umum', 'App\Http\Controllers\AsetUmumController', ['except' => ['show']]);
@@ -118,4 +120,3 @@ Route::group(['middleware' => 'auth'], function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
