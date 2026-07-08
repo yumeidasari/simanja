@@ -19,6 +19,7 @@
     <link href="{{ asset('material') }}/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{ asset('material') }}/demo/demo.css" rel="stylesheet" />
+    <link href="{{ asset('css') }}/simanja-theme.css?v=2" rel="stylesheet" />
     <link href="{{ asset('css/simanja-theme.css') }}" rel="stylesheet" />
 	
 	<!-- Datetimepicker -->
@@ -30,15 +31,14 @@
 	
     </head>
     <body class="{{ $class ?? '' }}">
-        @auth()
+        @if (auth()->check() && empty($guestLayout))
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
-            @include('layouts.page_templates.auth')
-        @endauth
-        @guest()
-            @include('layouts.page_templates.guest')
-        @endguest
+        @include('layouts.page_templates.auth')
+    @else
+        @include('layouts.page_templates.guest')
+    @endif
         @if (auth()->check())
 		<!---           -->
         <!--div class="fixed-plugin">

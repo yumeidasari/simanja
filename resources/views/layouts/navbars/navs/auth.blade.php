@@ -51,16 +51,10 @@
 		
         <li class="nav-item dropdown">
           <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <!--i class="material-icons">person</i-->
-			<lord-icon
-				src="https://cdn.lordicon.com/dxjqoygy.json"
-				trigger="loop"
-				colors="primary:#121331,secondary:#08a88a"
-				style="width:30px;height:30px">
-			</lord-icon>
-            <p class="d-lg-none d-md-block">
-              {{ __('Account') }}
-            </p>
+             <span class="navbar-avatar">{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}</span>
+             <p class="d-lg-none d-md-block">
+                {{ __('Account') }}
+             </p>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
             <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Profile') }}</a>

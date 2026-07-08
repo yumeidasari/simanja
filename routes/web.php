@@ -61,7 +61,6 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
 	//Route::resource('user', App\Http\Controllers\UserController::class)->name('*', 'user');
-	Route::delete('/user/{id}', 'UserController@destroy');
 	
 	Route::get('/opd/export', 'App\Http\Controllers\OpdController@processExport')->name('opd.export');
 	Route::get('/opd/import', 'App\Http\Controllers\OpdController@import');
@@ -111,6 +110,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::any('/aset-umum/detail/{id}', [App\Http\Controllers\AsetUmumController::class, 'detailAsetUmum'])->name('detailAsetUmum');
 	Route::any('/aset-umum/update/{id}', [App\Http\Controllers\AsetUmumController::class, 'updateAsetUmum'])->name('updateAsetUmum');
 	Route::resource('aset-umum', 'App\Http\Controllers\AsetUmumController', ['except' => ['show']]);
+	
+	// Data Pegawai (khusus admin, dicek juga di PegawaiController)
+	Route::resource('pegawai', 'App\Http\Controllers\PegawaiController', ['except' => ['show']]);
 	
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);

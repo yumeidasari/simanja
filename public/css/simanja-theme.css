@@ -24,9 +24,6 @@ body {
 }
 
 /* ---------- Sidebar ---------- */
-/* Template ini punya lapisan overlay putih (.sidebar-background:after)
-   yang nutupin warna sidebar kalau cuma override .sidebar biasa,
-   jadi overlay-nya sendiri yang perlu diwarnain */
 .sidebar .sidebar-background:after {
   background: var(--simanja-blue) !important;
   opacity: 0.97 !important;
@@ -77,6 +74,80 @@ body {
   background-color: rgba(11, 61, 102, 0.08);
   color: var(--simanja-blue);
 }
+
+/* ---------- Navbar tamu (landing page) ---------- */
+.navbar-transparent.navbar-absolute {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.navbar-transparent .navbar-brand b {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: 2px;
+}
+.navbar-transparent .navbar-nav .nav-item .nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 22px !important;
+  margin-left: 8px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+.navbar-transparent .navbar-nav .nav-item:not(:last-child) .nav-link {
+  border: 1.5px solid rgba(255,255,255,0.55);
+  color: #fff !important;
+}
+.navbar-transparent .navbar-nav .nav-item:not(:last-child) .nav-link:hover {
+  background-color: rgba(255,255,255,0.15);
+  border-color: #fff;
+}
+.navbar-transparent .navbar-nav .nav-item:last-child .nav-link {
+  background-color: #ffffff !important;
+  color: var(--simanja-blue) !important;
+  font-weight: 700;
+}
+.navbar-transparent .navbar-nav .nav-item:last-child .nav-link:hover {
+  background-color: #e9eef3 !important;
+  color: var(--simanja-blue-dark) !important;
+}
+
+/* ---------- Landing page ---------- */
+
+.page-header.login-page{
+    background-image:none !important;
+    background:linear-gradient(160deg,#082A47 0%,#0B3D66 55%,#124a75 100%) !important;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding-top:90px;
+}
+
+.page-header.login-page::before{
+    display:none !important;
+}
+
+.page-header.login-page .simanja-hero-full{
+    width:100%;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:40px 20px;
+}
+
+.page-header.login-page .footer{
+    position:static !important;
+    width:100%;
+    margin-top:auto;
+    padding:20px 0;
+}
 .sidebar .nav .nav-item .nav-link,
 .sidebar .nav .nav-item .nav-link p,
 .sidebar .nav li a,
@@ -115,12 +186,37 @@ body {
   color: #fff !important;
 }
 
-/* ---------- Card header (dipakai di banyak form) ---------- */
-.card-header-rose,
-.card-header-primary,
-.card-header-warning {
+/* ---------- Card header (dipakai di form/halaman biasa) ---------- */
+.card-header-rose:not(.card-header-icon),
+.card-header-primary:not(.card-header-icon),
+.card-header-warning:not(.card-header-icon) {
   background: linear-gradient(60deg, var(--simanja-blue), var(--simanja-blue-dark)) !important;
   box-shadow: 0 4px 20px 0 rgba(0,0,0,0.14);
+}
+
+/* ---------- Kartu umum (semua .card) biar lebih modern ---------- */
+.card {
+  border-radius: 14px !important;
+  overflow: hidden;
+}
+.card.card-stats {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card.card-stats:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.12) !important;
+}
+
+/* ---------- Panel "Aplikasi berdasarkan..." di dashboard ---------- */
+.main-panel .card:not(.card-stats) {
+  box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+  border-top: 4px solid var(--simanja-blue);
+}
+.main-panel .card:not(.card-stats) > div > b,
+.main-panel .card:not(.card-stats) b {
+  color: var(--simanja-blue);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
 }
 
 /* ---------- Tombol ---------- */
@@ -139,14 +235,6 @@ body {
   border-color: var(--simanja-red) !important;
 }
 
-/* ---------- Halaman login / welcome (background hero) ---------- */
-.page-header.login-page {
-  background-color: var(--simanja-blue) !important;
-}
-.page-header.login-page::before {
-  background: rgba(11, 61, 102, 0.85) !important;
-}
-
 /* ---------- Footer ---------- */
 footer, .footer {
   background-color: transparent;
@@ -156,6 +244,14 @@ footer a {
   color: var(--simanja-blue) !important;
   font-weight: 600;
 }
+.page-header.login-page .footer,
+.page-header.login-page .footer * {
+  color: rgba(255,255,255,0.85) !important;
+}
+.page-header.login-page .footer a {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
 
 /* ---------- Form input focus ---------- */
 .form-control:focus,
@@ -164,63 +260,901 @@ footer a {
   border-color: var(--simanja-red) !important;
 }
 
-/* ---------- Hero section (halaman welcome) ---------- */
+/* ---------- Hero section (halaman welcome / landing) ---------- */
 .simanja-hero {
   background: linear-gradient(135deg, var(--simanja-blue) 0%, var(--simanja-blue-dark) 100%);
-  padding: 80px 20px 110px;
-  margin: 30px -15px 0;
   color: #fff;
   position: relative;
   overflow: hidden;
 }
+.simanja-hero-full {
+  width: 100%;
+  padding: 60px 20px;
+}
 .simanja-hero::after {
   content: "";
   position: absolute;
-  bottom: -60px;
-  right: -60px;
-  width: 220px;
-  height: 220px;
+  bottom: -80px;
+  right: -80px;
+  width: 300px;
+  height: 300px;
   background: var(--simanja-red);
-  opacity: 0.18;
+  opacity: 0.16;
+  border-radius: 50%;
+}
+.simanja-hero::before {
+  content: "";
+  position: absolute;
+  top: -60px;
+  left: -60px;
+  width: 200px;
+  height: 200px;
+  background: #fff;
+  opacity: 0.05;
   border-radius: 50%;
 }
 .simanja-hero .hero-title {
-  font-size: 2.4rem;
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.5px;
+  font-size: 2.6rem;
   color: #fff;
   margin-bottom: 10px;
 }
 .simanja-hero .hero-subtitle {
-  font-size: 1.1rem;
-  color: rgba(255,255,255,0.85);
+  font-size: 1.15rem;
+  color: rgba(255,255,255,0.8);
 }
 
-/* ---------- Kartu fitur di bawah hero ---------- */
-.simanja-feature-card {
+/* ---------- Tombol CTA di hero ---------- */
+.btn-hero-cta {
+  display: inline-block;
+  background-color: var(--simanja-red);
+  color: #fff !important;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  padding: 15px 44px;
+  border-radius: 30px;
+  box-shadow: 0 10px 25px rgba(200,30,58,0.35);
+  transition: all 0.25s ease;
+}
+.btn-hero-cta:hover {
+  background-color: var(--simanja-red-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(200,30,58,0.45);
+}
+
+/* ---------- Highlight ikon minimalis (bukan kartu) ---------- */
+.hero-highlights {
+  display: flex;
+  justify-content: center;
+  gap: 55px;
+  margin-top: 65px;
+  flex-wrap: wrap;
+}
+.hero-highlight-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgba(255,255,255,0.85);
+  text-decoration: none !important;
+  cursor: pointer;
+}
+.hero-highlight-item i {
+  font-size: 32px;
+  margin-bottom: 10px;
+  color: #fff;
+  background: rgba(255,255,255,0.12);
+  padding: 16px;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+.hero-highlight-item:hover i {
+  background: var(--simanja-red);
+}
+.hero-highlight-item span {
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+/* ========================================================== 
+   TAMBAHAN — Dashboard stat cards, chart panel, footer fix,
+   dan Form Aset Diskominfo
+   ========================================================== */
+
+.off-canvas-sidebar .footer {
+  position: static !important;
+  bottom: auto !important;
+  width: auto !important;
+}
+
+.content .card-stats .card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 20px;
+  margin: 0;
+  box-shadow: none !important;
+}
+.content .card-stats .card-icon {
+  width: 56px;
+  height: 56px;
+  min-width: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none !important;
+  margin: 0 !important;
+  float: none !important;
+}
+.content .card-stats .card-icon .material-icons {
+  font-size: 28px;
+  color: #fff;
+  line-height: 1;
+}
+.content .card-stats .card-category {
+  color: #8a94a6;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  margin: 0 0 2px;
+}
+.content .card-stats .card-title {
+  color: var(--simanja-text);
+  font-weight: 700;
+  font-size: 2rem;
+  margin: 0;
+  line-height: 1.1;
+}
+.content .card-header-warning .card-icon { background: linear-gradient(135deg, #ff9a3d, #ff7043); }
+.content .card-header-success .card-icon { background: linear-gradient(135deg, #2ecc71, #16a085); }
+.content .card-header-danger  .card-icon { background: linear-gradient(135deg, var(--simanja-red), var(--simanja-red-dark)); }
+.content .card-header-info    .card-icon { background: linear-gradient(135deg, #29c5f6, var(--simanja-blue)); }
+
+.content .row > .col-md-6 {
+  margin-top: 24px;
+}
+.content .row > .col-md-6 > div[id^="pie-by-"] {
   background: #fff;
   border-radius: 14px;
-  padding: 30px 20px;
-  text-align: center;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-  margin-top: -60px;
-  position: relative;
-  z-index: 2;
-  transition: transform 0.2s ease;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+  padding: 24px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.simanja-feature-card:hover {
-  transform: translateY(-5px);
+
+.sm-form-card {
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 6px 24px rgba(20,30,60,0.08);
+  overflow: hidden;
 }
-.simanja-feature-card i {
-  font-size: 40px;
+.sm-form-card .card-header {
+  background: linear-gradient(60deg, var(--simanja-blue), var(--simanja-blue-dark)) !important;
+  padding: 28px 32px;
+}
+.sm-form-card .card-header h4 {
+  margin: 0;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: .01em;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sm-form-card .card-header .material-icons {
+  font-size: 26px;
+  color: #fff;
+}
+.sm-form-card .card-body {
+  padding: 32px;
+  background: #fff;
+}
+.sm-form-section-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
   color: var(--simanja-blue);
-  margin-bottom: 10px;
+  margin: 0 0 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #e5e8f0;
 }
-.simanja-feature-card h5 {
+.sm-form-card .form-group label {
+  font-size: 13px;
   font-weight: 600;
-  margin-bottom: 8px;
   color: var(--simanja-text);
 }
-.simanja-feature-card p {
-  color: #6c757d;
-  font-size: 0.9rem;
+.sm-form-card .form-control {
+  border-radius: 10px;
+  border: 1px solid #e2e5ee !important;
+  padding: .55rem .9rem;
+  background-color: #fafbfe;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.sm-form-card .form-control:focus {
+  border-color: var(--simanja-red) !important;
+  box-shadow: 0 0 0 3px rgba(200, 30, 58, 0.12);
+  background-color: #fff;
+}
+.sm-upload-box {
+  border: 2px dashed #d7dbe8;
+  border-radius: 10px;
+  padding: 22px;
+  background: #fafbfe;
+  transition: border-color .15s ease, background-color .15s ease;
+}
+.sm-upload-box:hover {
+  border-color: var(--simanja-blue);
+  background: #eef4f9;
+}
+.sm-upload-box .material-icons {
+  color: var(--simanja-blue);
+  font-size: 30px;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+.sm-form-card .card-footer {
+  background: #fafbfe;
+  border-top: 1px solid #eef0f5;
+  padding: 22px 32px;
+}
+.sm-form-card .btn-primary {
+  background: linear-gradient(60deg, var(--simanja-blue), var(--simanja-blue-dark)) !important;
+  border: none !important;
+  border-radius: 999px;
+  padding: 10px 34px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  box-shadow: 0 8px 20px rgba(11, 61, 102, 0.28);
+}
+.sm-form-card .btn-primary:hover {
+  background: linear-gradient(60deg, var(--simanja-red), var(--simanja-red-dark)) !important;
+  box-shadow: 0 10px 26px rgba(200, 30, 58, 0.3);
+}
+.sm-form-card .add-more {
+  border-radius: 999px;
+  padding: 9px 22px;
+  font-weight: 600;
+}
+
+@media (max-width: 767px) {
+  .content .card-stats .card-header {
+    flex-wrap: wrap;
+  }
+  .sm-form-card .card-body,
+  .sm-form-card .card-header,
+  .sm-form-card .card-footer {
+    padding: 20px;
+  }
+}
+.sm-form-card .form-group {
+  margin: 0 0 1.25rem 0 !important;
+}
+.sm-form-card .form-group label {
+  margin-bottom: 8px !important;
+  display: block;
+}
+
+.content .card-stats .card-icon {
+  padding: 0 !important;
+  line-height: 1;
+}
+.content .card-stats .card-header.card-header-icon .card-icon .material-icons,
+.content .card-stats .card-icon .material-icons {
+  width: auto !important;
+  height: auto !important;
+  line-height: 1 !important;
+  display: block !important;
+  text-align: center;
+}
+
+.sm-chart-title {
+  width: 100%;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  color: var(--simanja-blue);
+  font-size: 15px;
+  margin-bottom: 14px;
+}
+
+/* ========================================================== 
+   FIX TAMBAHAN: tabel, form label spacing, kartu statistik center
+   ========================================================== */
+
+.content .table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.content .table thead th {
+  color: var(--simanja-blue);
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  padding: 14px 16px;
+  border-bottom: 2px solid #eef0f5 !important;
+  border-top: none !important;
+  vertical-align: middle !important;
+}
+.content .table tbody td {
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 0.92rem !important;
+  color: var(--simanja-text) !important;
+  padding: 14px 16px !important;
+  vertical-align: middle !important;
+  border-top: 1px solid #f0f2f7 !important;
+}
+.content .table tbody tr:hover {
+  background-color: #f7f9fc;
+}
+
+.content .table tbody td:nth-child(2) * {
+  all: unset !important;
+  display: inline !important;
+  vertical-align: baseline !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+  color: inherit !important;
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.sm-form-card .row {
   margin-bottom: 0;
+}
+.sm-form-card .form-group,
+.sm-form-card .bmd-form-group,
+.sm-form-card [class*="col-"] {
+  margin-bottom: 1.75rem !important;
+}
+.sm-form-card label,
+.sm-form-card .bmd-label-floating {
+  position: static !important;
+  display: block !important;
+  transform: none !important;
+  margin: 0 0 10px 0 !important;
+  padding: 0 !important;
+  font-size: 13px !important;
+  line-height: 1.3 !important;
+}
+.sm-form-card .form-control {
+  position: static !important;
+  margin-top: 0 !important;
+  line-height: 1.5;
+  min-height: 44px;
+}
+
+.content .card-stats .card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 26px 20px;
+  text-align: center;
+}
+.content .card-stats .card-icon {
+  margin: 0 auto !important;
+}
+.content .card-stats .card-category,
+.content .card-stats .card-title {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+}
+
+/* ========================================================== 
+   FIX TAMBAHAN — Ikon navbar & sidebar
+   ========================================================== */
+
+.navbar .navbar-nav .nav-item .nav-link[data-toggle="dropdown"],
+.navbar .navbar-nav .dropdown-toggle {
+  width: 38px;
+  height: 38px;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50% !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.28);
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+.navbar .navbar-nav .nav-item .nav-link[data-toggle="dropdown"]:hover,
+.navbar .navbar-nav .dropdown-toggle:hover {
+  box-shadow: 0 4px 14px rgba(0,0,0,0.32);
+  transform: translateY(-1px);
+}
+.navbar .navbar-nav .nav-item .nav-link[data-toggle="dropdown"] .material-icons,
+.navbar .navbar-nav .dropdown-toggle .material-icons,
+.navbar .navbar-nav .nav-item .nav-link[data-toggle="dropdown"] i,
+.navbar .navbar-nav .dropdown-toggle i {
+  color: var(--simanja-blue) !important;
+  font-size: 22px !important;
+  line-height: 1 !important;
+}
+
+.sidebar .nav > .nav-item:first-child > .nav-link > .material-icons{
+    width:34px;
+    height:34px;
+    min-width:34px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    background:rgba(255,255,255,.08);
+    color:#fff !important;
+    margin-right:8px;
+}
+
+.sidebar .nav lord-icon{
+    width:30px !important;
+    height:30px !important;
+    margin-right:8px;
+    flex-shrink:0;
+}
+
+.sidebar .nav .nav-link{
+    display:flex;
+    align-items:center;
+}
+
+.sidebar .nav .nav-link[data-toggle="collapse"] p{
+    display:flex;
+    align-items:center;
+    width:100%;
+    margin:0;
+}
+
+.sidebar .nav .nav-link[data-toggle="collapse"] p .material-icons{
+    width:auto !important;
+    height:auto !important;
+    min-width:auto !important;
+    display:inline-block !important;
+    background:none !important;
+    border-radius:0 !important;
+    padding:0 !important;
+    margin-right:8px !important;
+    color:#fff !important;
+    font-size:20px !important;
+    line-height:1;
+}
+
+.sidebar .nav .nav-link[data-toggle="collapse"] .caret{
+    margin-left:auto;
+}
+
+.sidebar .nav .nav-item > a {
+  display: flex !important;
+  align-items: center;
+  padding: 11px 16px !important;
+  border-radius: 10px;
+  line-height: 1.25;
+}
+.sidebar .nav .nav-item > a p {
+  margin: 0 !important;
+  white-space: normal;
+}
+.sidebar .nav > .nav-item > a,
+.sidebar .nav > .nav-item > a p {
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 0.88rem !important;
+  letter-spacing: .01em;
+  color: rgba(255,255,255,0.92) !important;
+}
+.sidebar .nav .nav-item .collapse .nav-item > a,
+.sidebar .nav .nav-item .collapse .nav-item > a p {
+  font-weight: 500 !important;
+  font-size: 0.85rem !important;
+  color: rgba(255,255,255,0.85) !important;
+}
+.sidebar .nav .nav-item p[style*="background-color:pink"] {
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: .08em !important;
+  color: rgba(255,255,255,0.55) !important;
+  margin-top: 14px !important;
+}
+
+.sidebar .nav .nav-item > a[data-toggle="collapse"] .caret,
+.sidebar .nav .nav-item > a[data-toggle="collapse"] p .material-icons {
+  width: auto !important;
+  height: auto !important;
+  min-width: auto !important;
+  background: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* ========================================================== 
+   FIX TAMBAHAN v4 — Card biasa (Edit Profile, Ubah Password, dll)
+   ========================================================== */
+.card-header:not(.card-header-icon) .card-title {
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 600 !important;
+  margin-bottom: 6px !important;
+  font-size: 1.15rem !important;
+}
+.card-header:not(.card-header-icon) .card-category {
+  opacity: 0.85;
+  font-size: 0.85rem !important;
+  margin-bottom: 0 !important;
+}
+.card-body {
+  padding: 28px 24px !important;
+}
+.card-footer {
+  padding: 18px 24px 26px !important;
+  display: flex;
+  justify-content: center;
+  background: transparent;
+  border-top: none !important;
+}
+.card-footer .btn {
+  border-radius: 30px !important;
+  padding: 11px 36px !important;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  box-shadow: 0 6px 16px rgba(11, 61, 102, 0.22);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.card-footer .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(11, 61, 102, 0.3);
+}
+.container-fluid > .row + .row {
+  margin-top: 8px;
+}
+/* ==========================================================
+   FIX TAMBAHAN v5 — Card header kasih napas + polesan visual
+   biar senada sama gaya hero (ada aksen lingkaran halus)
+   ========================================================== */
+.card-header:not(.card-header-icon) {
+  padding: 28px 30px !important;
+  box-shadow: 0 4px 20px 0 rgba(11, 61, 102, 0.28) !important;
+  position: relative;
+  overflow: hidden;
+}
+.card-header:not(.card-header-icon)::after {
+  content: "";
+  position: absolute;
+  top: -35px;
+  right: -35px;
+  width: 110px;
+  height: 110px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.card-header:not(.card-header-icon) .card-title {
+  font-size: 1.3rem !important;
+  position: relative;
+  z-index: 1;
+}
+.card-header:not(.card-header-icon) .card-category {
+  position: relative;
+  z-index: 1;
+}
+/* ==========================================================
+   FIX TAMBAHAN v6:
+   1. Jarak ikon & teks "Data User" / "Data Aset" di sidebar
+   2. Polesan halaman listing (Aset Umum, dll): search bar,
+      badge kondisi, container tabel, ikon aksi
+   ========================================================== */
+
+/* ---------- 1. Sidebar: kasih gap antara ikon & teks di menu grup ---------- */
+.sidebar .nav .nav-link[data-toggle="collapse"] p {
+  gap: 10px;
+}
+
+/* ---------- 2a. Search bar & tombol di halaman listing ---------- */
+.card-body .form-control {
+  border-radius: 8px !important;
+}
+.card-body .input-group .form-control {
+  border: 1px solid #e2e5ee !important;
+  padding-left: 16px !important;
+}
+
+/* ---------- 2b. Container tabel dikasih sudut rounded biar nyatu sama card ---------- */
+.table-responsive {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* ---------- 2c. Badge kondisi (baik/rusak) jadi pill modern ---------- */
+.badge {
+  border-radius: 30px !important;
+  padding: 6px 16px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  font-size: 0.68rem !important;
+}
+
+/* ---------- 2d. Ikon aksi (edit/hapus/detail) dikasih efek hover halus ---------- */
+.table .btn-link {
+  transition: transform 0.15s ease;
+  border-radius: 8px !important;
+}
+.table .btn-link:hover {
+  transform: scale(1.2);
+  background-color: rgba(11, 61, 102, 0.06) !important;
+}
+.table .btn-danger.btn-link:hover {
+  background-color: rgba(200, 30, 58, 0.08) !important;
+}
+/* ==========================================================
+   FIX TAMBAHAN v7 — Halaman Login & Register
+   ========================================================== */
+
+/* Tombol submit (LETS GO / CREATE ACCOUNT) — sebelumnya teksnya
+   pink nyaris gak kebaca di atas background navy */
+.page-header.login-page .btn {
+  color: #ffffff !important;
+  border-radius: 30px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.6px;
+  padding: 12px 42px !important;
+  box-shadow: 0 8px 20px rgba(11, 61, 102, 0.3);
+  transition: all 0.2s ease;
+}
+.page-header.login-page .btn:hover {
+  background-color: var(--simanja-red) !important;
+  border-color: var(--simanja-red) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(200,30,58,0.35);
+}
+
+/* Checkbox (Remember me / I agree) pakai warna brand, bukan ungu default */
+.page-header.login-page input[type="checkbox"] {
+  accent-color: var(--simanja-red);
+}
+
+/* Ikon di kiri input (email/password) diwarnain navy biar senada */
+.page-header.login-page .input-group-text,
+.page-header.login-page .input-group-prepend i,
+.page-header.login-page .input-group-prepend .material-icons {
+  color: var(--simanja-blue) !important;
+}
+/* ==========================================================
+   FIX TAMBAHAN v8 — Halaman Profile lebih modern
+   ========================================================== */
+
+/* Avatar bulat inisial nama di pojok header card */
+.profile-avatar {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: 3px solid rgba(255,255,255,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: 800;
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+  position: absolute;
+  top: 22px;
+  right: 34px;
+  z-index: 2;
+}
+
+/* Label field jadi caption kecil uppercase warna brand, bukan teks abu polos */
+.card-body label.col-form-label {
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--simanja-blue) !important;
+  padding-top: 16px !important;
+}
+
+/* Input jadi lebih modern: background halus + border-bottom tebal yang nyala pas fokus */
+.card-body .form-control {
+  background-color: #fafbfe !important;
+  border: none !important;
+  border-bottom: 2px solid #e2e5ee !important;
+  border-radius: 6px 6px 0 0 !important;
+  padding: 10px 14px !important;
+  transition: all 0.2s ease;
+}
+.card-body .form-control:focus {
+  background-color: #fff !important;
+  border-bottom: 2px solid var(--simanja-red) !important;
+  box-shadow: none !important;
+}
+.card-body .row {
+  margin-bottom: 6px;
+}
+/* ==========================================================
+   FIX TAMBAHAN v9 — Redesign Dashboard total
+   ========================================================== */
+
+/* ---------- Banner sambutan ---------- */
+.sm-dash-welcome {
+  background: linear-gradient(120deg, var(--simanja-blue) 0%, var(--simanja-blue-dark) 100%);
+  border-radius: 16px;
+  padding: 26px 30px;
+  margin-bottom: 24px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.sm-dash-welcome::after {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 150px;
+  height: 150px;
+  background: var(--simanja-red);
+  opacity: 0.18;
+  border-radius: 50%;
+}
+.sm-dash-welcome h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 1.4rem;
+  margin: 0 0 6px;
+  position: relative;
+  z-index: 1;
+}
+.sm-dash-welcome p {
+  margin: 0;
+  opacity: 0.85;
+  font-size: 0.92rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Shortcut menu cepat ---------- */
+.sm-dash-shortcuts {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.sm-shortcut-card {
+  flex: 1;
+  min-width: 200px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px 22px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  transition: all 0.2s ease;
+  border-left: 4px solid var(--simanja-blue);
+}
+.sm-shortcut-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(11,61,102,0.15);
+  border-left-color: var(--simanja-red);
+}
+.sm-shortcut-card i {
+  font-size: 26px;
+  color: #fff;
+  background: var(--simanja-blue);
+  padding: 10px;
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+.sm-shortcut-card:hover i {
+  background: var(--simanja-red);
+}
+.sm-shortcut-card span {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--simanja-text);
+}
+
+/* ---------- Empty state "No data" biar gak polos ---------- */
+.content .row > .col-md-6 > div[id^="pie-by-"] {
+  min-height: 260px;
+  border: 1.5px dashed #e2e5ee;
+  box-shadow: none !important;
+  background: #fbfcfe;
+}
+.content .row > .col-md-6 > div[id^="pie-by-"]:has(*:only-child) {
+  color: #b0b7c3;
+}
+/* ==========================================================
+   FIX TAMBAHAN v10 — Navbar Avatar (Final)
+   ========================================================== */
+
+/* Wrapper avatar */
+.navbar .navbar-nav .nav-item .nav-link[data-toggle="dropdown"],
+.navbar .navbar-nav .dropdown-toggle{
+    display:flex !important;
+    align-items:center;
+    justify-content:center;
+
+    width:42px !important;
+    height:42px !important;
+
+    padding:0 !important;
+    margin:0 0 0 8px !important;
+
+    background:transparent !important;
+    border:none !important;
+    border-radius:50% !important;
+    box-shadow:none !important;
+}
+
+/* Avatar inisial */
+.navbar-avatar{
+    width:38px;
+    height:38px;
+
+    min-width:38px;
+    min-height:38px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+    overflow:hidden;
+
+    font-family:'Montserrat',sans-serif;
+    font-size:15px;
+    font-weight:800;
+    line-height:1;
+
+    color:#ffffff !important;
+
+    background:linear-gradient(
+        135deg,
+        var(--simanja-blue),
+        var(--simanja-blue-dark)
+    );
+
+    /* Garis tepi supaya bulatnya jelas */
+    border:2px solid rgba(255,255,255,.55);
+
+    /* Shadow halus */
+    box-shadow:
+        0 0 0 1px rgba(0,0,0,.08),
+        0 4px 12px rgba(0,0,0,.22);
+
+    transition:all .2s ease;
+}
+
+/* Hover */
+.navbar .navbar-nav .dropdown-toggle:hover .navbar-avatar{
+    transform:translateY(-1px);
+    box-shadow:
+        0 0 0 1px rgba(0,0,0,.08),
+        0 6px 16px rgba(0,0,0,.30);
 }

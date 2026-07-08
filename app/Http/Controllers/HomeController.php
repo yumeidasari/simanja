@@ -73,8 +73,12 @@ class HomeController extends Controller
 		}
 
 		$pieByJenis = \Lava::PieChart('pie_by_jenis', $dataTable, [
-			'title'  => 'Aplikasi berdasarkan jenis Layanan',
+            'titleTextStyle' => ['fontName' => 'Poppins', 'fontSize' => 16, 'bold' => true, 'color' => '#0B3D66'],
 			'is3D'   => true,
+            'width'  => '100%',
+            'chartArea' => ['left' => '5%', 'top' => 10, 'width' => '90%', 'height' => '85%'],
+            'legend' => ['textStyle' => ['fontName' => 'Poppins', 'color' => '#2D3436']],
+            'backgroundColor' => 'transparent',
 			'slices' => [
 				['offset' => 0.2],
 				['offset' => 0.25],
@@ -99,7 +103,10 @@ class HomeController extends Controller
         }
 
         $pieByOpd = \Lava::PieChart('pie_by_opd', $byOPDTable, [
-            "title" => "Aplikasi berdasarkan OPD",
+            "width" => "100%",
+            "chartArea" => ["left" => "5%", "top" => 10, "width" => "90%", "height" => "85%"],
+            "legend" => ["textStyle" => ["fontName" => "Poppins", "color" => "#2D3436"]],
+            "backgroundColor" => "transparent",
             "orientation" => "horizontal"
         ]);
 		

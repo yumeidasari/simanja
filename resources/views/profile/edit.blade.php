@@ -11,6 +11,7 @@
 
             <div class="card ">
               <div class="card-header card-header-rose">
+                <div class="profile-avatar">{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}</div>
                 <h4 class="card-title">{{ __('Edit Profile') }}</h4>
                 <p class="card-category">{{ __('Informasi Data User') }}</p>
               </div>
