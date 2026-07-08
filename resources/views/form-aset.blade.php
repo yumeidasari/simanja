@@ -1,4 +1,4 @@
-@extends('layouts.app', ['class' => 'off-canvas-sidebar', 'activePage' => 'form-aset', 'title' => __('Material Dashboard')])
+@extends('layouts.app', ['class' => 'off-canvas-sidebar', 'activePage' => 'form-aset', 'title' => __('Material Dashboard'), 'titlePage' => __('Form Aset Diskominfo')])
 
 @section('content')
 <div class="container" style="height: auto;">

@@ -153,6 +153,18 @@
               </a>
             </li>
 		@endif	
+			<li class="nav-item{{ $activePage == 'form-aset' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('form-aset') }}">
+                <!--i class="material-icons">mediation</i-->
+				<lord-icon
+					src="https://cdn.lordicon.com/xirobkro.json"
+					trigger="loop"
+					colors="primary:#121331,secondary:#08a88a"
+					style="width:30px;height:30px">
+				</lord-icon>
+                &nbsp;&nbsp;{{ __('Input Aset Diskominfo') }} 
+              </a>
+            </li>
 			<li class="nav-item{{ $activePage == 'aset-umum' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('aset-umum.index') }}">
                 <!--i class="material-icons">mediation</i-->

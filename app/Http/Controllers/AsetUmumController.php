@@ -75,7 +75,8 @@ class AsetUmumController extends Controller
 		$aset->id_unit_kerja = $request->id_unit_kerja;
 		$aset->thn_pengadaan = $request->thn_pengadaan;
 		//$aset->createdBy = 0;
-        $aset->save();
+        $aset->createdBy = auth()->user()->id;
+		$aset->save();
 		//Jika ada lampiran
 				
 		if ($request->hasFile('file')) {

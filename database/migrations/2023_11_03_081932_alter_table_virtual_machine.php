@@ -12,10 +12,12 @@ class AlterTableVirtualMachine extends Migration
      * @return void
      */
     public function up()
-    {
-		Schema::table('ref_alat', function (Blueprint $table) {
-			$table->id()->change();
-		});
+{
+    /*
+    Schema::table('ref_alat', function (Blueprint $table) {
+        $table->id()->change();
+    });
+    */
      /*
 		Schema::table('virtual_machine', function (Blueprint $table) {
             
@@ -26,7 +28,7 @@ class AlterTableVirtualMachine extends Migration
         });
 		
 	*/
-    }
+}
 
     /**
      * Reverse the migrations.

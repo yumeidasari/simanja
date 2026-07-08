@@ -13,10 +13,11 @@ class CreateTableDetailAlat extends Migration
      */
     public function up()
     {
+        /*
 		Schema::table('ref_alat', function (Blueprint $table) {
 			$table->id()->change();
 		});
-		
+		*/
         Schema::create('detail_alat', function (Blueprint $table) {
             $table->id();
 			$table->decimal('harga',15,2)->nullable();
@@ -33,12 +34,14 @@ class CreateTableDetailAlat extends Migration
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));	
         });
 		
+		/*
 		Schema::table('virtual_machine', function (Blueprint $table) {
             
 			$table->unsignedInteger('id_alat')->nullable()->after('id');
             $table->foreign('id_alat')->references('id')->on('ref_alat');
 					
         });
+		*/
     }
 
     /**
