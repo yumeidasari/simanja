@@ -2,11 +2,6 @@
     <div class="container">
         <nav class="float-left">
         <ul>
-            <li>
-				<a  href="https://melati.beltim.go.id/" target="_blank">
-					{{ __('Melati') }}
-				</a>
-			</li>
 			<li>
 				<a  href="http://diskominfo.beltim.go.id/" target="_blank">
 					{{ __('Diskominfo Beltim') }}

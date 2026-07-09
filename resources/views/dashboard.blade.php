@@ -9,12 +9,8 @@
           <p>Berikut ringkasan data aset & jaringan IT Diskominfo Beltim.</p>
         </div>
       </div>
-
+      
       <div class="sm-dash-shortcuts">
-        <a href="{{ route('form-aset') }}" class="sm-shortcut-card">
-          <i class="material-icons">add_box</i>
-          <span>Input Aset Diskominfo</span>
-        </a>
         <a href="{{ route('aset-umum.index') }}" class="sm-shortcut-card">
           <i class="material-icons">devices</i>
           <span>Aset Umum</span>

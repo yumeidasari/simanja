@@ -66,7 +66,12 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Nama Penanggung Jawab</label>
-                  <input type="text" class="form-control" id="penanggung_jawab" name="penanggung_jawab" required>
+                  <select class="form-control" id="penanggung_jawab" name="penanggung_jawab" required>
+                    <option value="">--Pilih Penanggung Jawab</option>
+                    @foreach($data_pegawai as $pegawai)
+                      <option value="{{ $pegawai->nama }}">{{ $pegawai->nama }} ({{ $pegawai->bidang }})</option>
+                    @endforeach
+                  </select>
                 </div>
               </div>
               <div class="col-md-6">

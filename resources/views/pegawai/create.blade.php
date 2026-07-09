@@ -30,7 +30,7 @@
 					<label class="col-sm-2 col-form-label" for="">Nama Pegawai</label>
 				<div class="col-sm-7">
 				  <div class="form-group">
-                    <input type="text" name="nama" class="form-control">
+                    <input type="text" name="nama" class="form-control" value="{{ old('nama') }}">
 					@if ($errors->has('nama'))
 						<span class="text-danger">{{ $errors->first('nama') }}</span>
 					@endif
@@ -42,7 +42,7 @@
 					<label class="col-sm-2 col-form-label" for="">NIP</label>
 				<div class="col-sm-7">
 				  <div class="form-group">
-                    <input type="text" name="nip" class="form-control" maxlength="20">
+                    <input type="text" name="nip" class="form-control" value="{{ old('nip') }}" maxlength="20">
 					@if ($errors->has('nip'))
 						<span class="text-danger">{{ $errors->first('nip') }}</span>
 					@endif
@@ -56,10 +56,9 @@
 				  <div class="form-group">
                     <select name="bidang" class="form-control">
 						<option value="">--Pilih Bidang</option>
-						<option value="Sekretariat">Sekretariat</option>
-						<option value="IKP">IKP</option>
-						<option value="KIPS">KIPS</option>
-						<option value="APTIKA">APTIKA</option>
+						@foreach($daftarBidang as $b)
+							<option value="{{ $b }}" {{ old('bidang') == $b ? 'selected' : '' }}>{{ $b }}</option>
+						@endforeach
 					</select>
 					@if ($errors->has('bidang'))
 						<span class="text-danger">{{ $errors->first('bidang') }}</span>

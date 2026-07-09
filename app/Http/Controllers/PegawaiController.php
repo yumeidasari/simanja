@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Models\Pegawai;
 
 class PegawaiController extends Controller
 {
+    private $daftarBidang = [
+        'Sekretariat',
+        'Bidang Aplikasi Informatika',
+        'Bidang Informasi Dan Komunikasi Publik',
+        'Bidang Keamanan Informasi, Persandian Dan Statistik',
+    ];
+
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
@@ -25,7 +33,8 @@ class PegawaiController extends Controller
 
     public function create()
     {
-        return view('pegawai.create');
+        $daftarBidang = $this->daftarBidang;
+        return view('pegawai.create', compact('daftarBidang'));
     }
 
     public function store(Request $request)
@@ -33,7 +42,7 @@ class PegawaiController extends Controller
         $request->validate([
             'nama'   => 'required',
             'nip'    => 'required|max:20',
-            'bidang' => 'required|in:Sekretariat,Aplikasi Informatika, Informasi dan Komunikasi Publik,Keamanan Informasi, Persandian, dan Statistik',
+            'bidang' => ['required', Rule::in($this->daftarBidang)],
         ]);
 
         $pegawai = new Pegawai;
@@ -48,7 +57,8 @@ class PegawaiController extends Controller
     public function edit($id)
     {
         $pegawai = Pegawai::findOrFail($id);
-        return view('pegawai.edit', compact('pegawai'));
+        $daftarBidang = $this->daftarBidang;
+        return view('pegawai.edit', compact('pegawai', 'daftarBidang'));
     }
 
     public function update(Request $request, $id)
@@ -56,7 +66,7 @@ class PegawaiController extends Controller
         $request->validate([
             'nama'   => 'required',
             'nip'    => 'required|max:20',
-            'bidang' => 'required|in:Sekretariat,IKP,KIPS,APTIKA',
+            'bidang' => ['required', Rule::in($this->daftarBidang)],
         ]);
 
         $pegawai = Pegawai::findOrFail($id);

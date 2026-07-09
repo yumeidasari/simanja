@@ -14,14 +14,17 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $total_aset = \App\Models\AsetUmum::count();
+    $total_opd = \App\Models\RefOPD::count();
+    return view('welcome', compact('total_aset', 'total_opd'));
 });
+
 //Route::get('/form-aset', function () {
 //    return view('form-aset');
 //})->name('form-aset');
 
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 //Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
 
@@ -103,8 +106,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/vm/import', 'App\Http\Controllers\VmController@processImport')->name('vm.import');
 	Route::resource('vm', 'App\Http\Controllers\VmController', ['except' => ['show']]);
 	
-	// Form Aset Diskominfo (sekarang wajib login)
-	Route::get('/form-aset',[App\Http\Controllers\AsetUmumController::class, 'formAset'])->name('form-aset');
+	// Form Aset Diskominfo (sekarang jadi modal di halaman Aset Umum)
 	Route::post('/form-aset',[App\Http\Controllers\AsetUmumController::class, 'store'])->name('simpanAsetUmum');
 	
 	Route::any('/aset-umum/detail/{id}', [App\Http\Controllers\AsetUmumController::class, 'detailAsetUmum'])->name('detailAsetUmum');
@@ -119,6 +121,5 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 });
 
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

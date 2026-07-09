@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\AsetUmum;
 use App\Models\UnitKerja;
 use App\Models\LampiranAset;
+use App\Models\Pegawai;
 use App\Models\User;
 use Excel;
 use Illuminate\Support\Facades\DB;
@@ -33,12 +34,14 @@ class AsetUmumController extends Controller
 						->orderby('aset_kantor.id','desc')
                         ->paginate();
 						//return response()->json(['data' => $semua_aset]);
-		//$semua_file = LampiranAset::all();				
-        return view('aset-umum.index', compact('semua_aset'));       
+		//$semua_file = LampiranAset::all();
+		$data_bidang = UnitKerja::all();
+        return view('aset-umum.index', compact('semua_aset', 'data_bidang'));       
     }
 	
 	public function formAset(){
 		$data_bidang = UnitKerja::all();
+		$data_pegawai = Pegawai::all();
 		/**
 		$url = 'https://api-splp.layanan.go.id/pegawaidiskominfo/1.0';
         $apikey = 'eyJ4NXQiOiJOVGRtWmpNNFpEazNOalkwWXpjNU1tWm1PRGd3TVRFM01XWXdOREU1TVdSbFpEZzROemM0WkE9PSIsImtpZCI6ImdhdGV3YXlfY2VydGlmaWNhdGVfYWxpYXMiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJkaXNrb21pbmZvX2JlbHRpbWthYkBjYXJib24uc3VwZXIiLCJhcHBsaWNhdGlvbiI6eyJvd25lciI6ImRpc2tvbWluZm9fYmVsdGlta2FiIiwidGllclF1b3RhVHlwZSI6bnVsbCwidGllciI6IlVubGltaXRlZCIsIm5hbWUiOiJTSU1BTkpBIiwiaWQiOjI3MjEsInV1aWQiOiI4MzhlZGI0YS01OGQ1LTQ4ZWYtYmY5Zi05YzI2ODE3NWZjYWMifSwiaXNzIjoiaHR0cHM6XC9cL3NwbHAubGF5YW5hbi5nby5pZDo0NDNcL29hdXRoMlwvdG9rZW4iLCJ0aWVySW5mbyI6eyJVbmxpbWl0ZWQiOnsidGllclF1b3RhVHlwZSI6InJlcXVlc3RDb3VudCIsImdyYXBoUUxNYXhDb21wbGV4aXR5IjowLCJncmFwaFFMTWF4RGVwdGgiOjAsInN0b3BPblF1b3RhUmVhY2giOmZhbHNlLCJzcGlrZUFycmVzdExpbWl0IjoxMDAwMDAsInNwaWtlQXJyZXN0VW5pdCI6InNlYyJ9fSwia2V5dHlwZSI6IlBST0RVQ1RJT04iLCJwZXJtaXR0ZWRSZWZlcmVyIjoiIiwic3Vic2NyaWJlZEFQSXMiOlt7InN1YnNjcmliZXJUZW5hbnREb21haW4iOiJjYXJib24uc3VwZXIiLCJuYW1lIjoiUGVnYXdhaV9EaXNrb21pbmZvU1AiLCJjb250ZXh0IjoiXC9wZWdhd2FpZGlza29taW5mb3NwXC8xLjAiLCJwdWJsaXNoZXIiOiJkaXNrb21pbmZvX2JlbHRpbWthYiIsInZlcnNpb24iOiIxLjAiLCJzdWJzY3JpcHRpb25UaWVyIjoiVW5saW1pdGVkIn1dLCJ0b2tlbl90eXBlIjoiYXBpS2V5IiwicGVybWl0dGVkSVAiOiIiLCJpYXQiOjE3MDI0MzgxMjIsImp0aSI6IjEzN2ZjYTlmLWU1OGUtNDI0Ni1iMzQ4LTM4MDg0YTg0OGE0ZCJ9.tNScscmMysE8AFy5CUjt5Lj80ti1clSHaAgB3VBKw6XyPg-hsIZNxhRT8zP0oHSnsKyysyBV865RgGSlNwSv31bRRGbS6LNn3nVZFDvxcYLqWSJ4XP0Xx4EFY1CY-nt3Z4s64AA0lxE9nGD5Bemybxk13mEIir2x85HQZQ7-uL9BHP3-TE2R_blBiTPQpEtbC8xQsBUxHHqg0oW2D-2VK_dBcJKb3vZdKojft_kbYHnQWKL3UcdZzyZcoofEnqxI0FblVWW26mpiGZXEIgBwcpaCDf5VwC3-v4I7R9HGvCFulhQChMiSH4brdY2ZVsjeJhEGbOaKhqd11gGLZxynqw==';
@@ -51,7 +54,7 @@ class AsetUmumController extends Controller
         //$data = json_decode($response, TRUE);
 		
 		//return response()->json(['data' => $endpoint]);
-		return view('form-aset', compact('data_bidang'));
+		return view('form-aset', compact('data_bidang', 'data_pegawai'));
 	}
 	
 	public function store(Request $request)
@@ -134,8 +137,9 @@ class AsetUmumController extends Controller
 		$id_aset = $data[0];
 		$gambar = LampiranAset::all();
 		$data_bidang = UnitKerja::all();
+		$data_pegawai = Pegawai::all();
 		//return response()->json(['data' => count($gambar)]);
-		return view('aset-umum.detail', compact('data', 'gambar', 'data_bidang', 'id_aset'));
+		return view('aset-umum.detail', compact('data', 'gambar', 'data_bidang', 'data_pegawai', 'id_aset'));
 	}
 	
 	public function updateAsetUmum(Request $request, $id){

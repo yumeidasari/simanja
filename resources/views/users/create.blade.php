@@ -76,6 +76,39 @@
 				  </div>
                 </div>
                 </div>
+
+				<div class="row">
+                    <label class="col-sm-2 col-form-label" for="">Role</label>
+				<div class="col-sm-7">
+				  <div class="form-group">
+                    <select name="role" class="form-control">
+						<option value="">--Pilih Role</option>
+						<option value="ADMIN">Admin</option>
+						<option value="USER">User</option>
+					</select>
+					@if ($errors->has('role'))
+						<span class="text-danger">{{ $errors->first('role') }}</span>
+					@endif
+				  </div>
+                </div>
+				</div>
+
+				<div class="row">
+                    <label class="col-sm-2 col-form-label" for="">Unit Kerja / Bidang</label>
+				<div class="col-sm-7">
+				  <div class="form-group">
+                    <select name="id_bidang" class="form-control">
+						<option value="">--Pilih Unit Kerja (khusus role User)</option>
+						@foreach($data_bidang as $uk)
+							<option value="{{ $uk->id }}">{{ $uk->nama_unit_kerja }}</option>
+						@endforeach
+					</select>
+					@if ($errors->has('id_bidang'))
+						<span class="text-danger">{{ $errors->first('id_bidang') }}</span>
+					@endif
+				  </div>
+                </div>
+				</div>
                     
 			  </div> <!--card-body-->
 			  

@@ -19,8 +19,7 @@
     <link href="{{ asset('material') }}/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{ asset('material') }}/demo/demo.css" rel="stylesheet" />
-    <link href="{{ asset('css') }}/simanja-theme.css?v=2" rel="stylesheet" />
-    <link href="{{ asset('css/simanja-theme.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css') }}/simanja-theme.css?v=6" rel="stylesheet" />
 	
 	<!-- Datetimepicker -->
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -171,5 +170,24 @@
             type="text/javascript"></script-->
 		
         @stack('js')
+
+        <script>
+        // Fix: paksa scroll di dalam modal form (Input Aset Diskominfo, Tambah Alat, dll)
+        // karena ada plugin lama (perfect-scrollbar / material-dashboard.js) yang suka
+        // nyerobot event scroll di Chrome. Dipasang di fase "capture" biar kesegat duluan.
+        document.addEventListener('wheel', function (e) {
+            var scrollable = e.target.closest('.modal-content .card-body, .modal-content .modal-body');
+            if (!scrollable) return;
+
+            var atTop = scrollable.scrollTop <= 0;
+            var atBottom = scrollable.scrollTop + scrollable.clientHeight >= scrollable.scrollHeight - 1;
+
+            if ((e.deltaY < 0 && !atTop) || (e.deltaY > 0 && !atBottom)) {
+                scrollable.scrollTop += e.deltaY;
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }, { capture: true, passive: false });
+        </script>
     </body>
 </html>

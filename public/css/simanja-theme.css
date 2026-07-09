@@ -789,7 +789,7 @@ footer a {
   margin: 0 !important;
 }
 
-/* ========================================================== 
+/* ==========================================================
    FIX TAMBAHAN v4 — Card biasa (Edit Profile, Ubah Password, dll)
    ========================================================== */
 .card-header:not(.card-header-icon) .card-title {
@@ -913,8 +913,6 @@ footer a {
    FIX TAMBAHAN v7 — Halaman Login & Register
    ========================================================== */
 
-/* Tombol submit (LETS GO / CREATE ACCOUNT) — sebelumnya teksnya
-   pink nyaris gak kebaca di atas background navy */
 .page-header.login-page .btn {
   color: #ffffff !important;
   border-radius: 30px !important;
@@ -931,12 +929,10 @@ footer a {
   box-shadow: 0 10px 25px rgba(200,30,58,0.35);
 }
 
-/* Checkbox (Remember me / I agree) pakai warna brand, bukan ungu default */
 .page-header.login-page input[type="checkbox"] {
   accent-color: var(--simanja-red);
 }
 
-/* Ikon di kiri input (email/password) diwarnain navy biar senada */
 .page-header.login-page .input-group-text,
 .page-header.login-page .input-group-prepend i,
 .page-header.login-page .input-group-prepend .material-icons {
@@ -946,7 +942,6 @@ footer a {
    FIX TAMBAHAN v8 — Halaman Profile lebih modern
    ========================================================== */
 
-/* Avatar bulat inisial nama di pojok header card */
 .profile-avatar {
   width: 68px;
   height: 68px;
@@ -966,7 +961,6 @@ footer a {
   z-index: 2;
 }
 
-/* Label field jadi caption kecil uppercase warna brand, bukan teks abu polos */
 .card-body label.col-form-label {
   font-family: 'Poppins', sans-serif !important;
   font-size: 0.75rem !important;
@@ -977,7 +971,6 @@ footer a {
   padding-top: 16px !important;
 }
 
-/* Input jadi lebih modern: background halus + border-bottom tebal yang nyala pas fokus */
 .card-body .form-control {
   background-color: #fafbfe !important;
   border: none !important;
@@ -998,7 +991,6 @@ footer a {
    FIX TAMBAHAN v9 — Redesign Dashboard total
    ========================================================== */
 
-/* ---------- Banner sambutan ---------- */
 .sm-dash-welcome {
   background: linear-gradient(120deg, var(--simanja-blue) 0%, var(--simanja-blue-dark) 100%);
   border-radius: 16px;
@@ -1035,16 +1027,15 @@ footer a {
   z-index: 1;
 }
 
-/* ---------- Shortcut menu cepat ---------- */
 .sm-dash-shortcuts {
-  display: flex;
+  display: flex !important;
   gap: 16px;
   margin-bottom: 28px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .sm-shortcut-card {
-  flex: 1;
-  min-width: 200px;
+  flex: 0 1 280px;
   background: #fff;
   border-radius: 14px;
   padding: 20px 22px;
@@ -1079,7 +1070,6 @@ footer a {
   color: var(--simanja-text);
 }
 
-/* ---------- Empty state "No data" biar gak polos ---------- */
 .content .row > .col-md-6 > div[id^="pie-by-"] {
   min-height: 260px;
   border: 1.5px dashed #e2e5ee;
@@ -1093,7 +1083,6 @@ footer a {
    FIX TAMBAHAN v10 — Navbar Avatar (Final)
    ========================================================== */
 
-/* Wrapper avatar */
 .navbar .navbar-nav .nav-item .nav-link[data-toggle="dropdown"],
 .navbar .navbar-nav .dropdown-toggle{
     display:flex !important;
@@ -1112,7 +1101,6 @@ footer a {
     box-shadow:none !important;
 }
 
-/* Avatar inisial */
 .navbar-avatar{
     width:38px;
     height:38px;
@@ -1140,10 +1128,8 @@ footer a {
         var(--simanja-blue-dark)
     );
 
-    /* Garis tepi supaya bulatnya jelas */
     border:2px solid rgba(255,255,255,.55);
 
-    /* Shadow halus */
     box-shadow:
         0 0 0 1px rgba(0,0,0,.08),
         0 4px 12px rgba(0,0,0,.22);
@@ -1151,10 +1137,214 @@ footer a {
     transition:all .2s ease;
 }
 
-/* Hover */
 .navbar .navbar-nav .dropdown-toggle:hover .navbar-avatar{
     transform:translateY(-1px);
     box-shadow:
         0 0 0 1px rgba(0,0,0,.08),
         0 6px 16px rgba(0,0,0,.30);
+}
+
+/* ==========================================================
+   FIX TAMBAHAN v11 — Sidebar kepotong di bawah (menu makin banyak)
+   ========================================================== */
+
+.sidebar .sidebar-wrapper {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: calc(100vh - 90px) !important;
+  padding-bottom: 40px !important;
+}
+
+.sidebar .nav .nav-item > a {
+  padding: 9px 16px !important;
+}
+.sidebar .nav .nav-item .collapse .nav-item > a {
+  padding: 8px 16px !important;
+}
+
+.sidebar .sidebar-wrapper::-webkit-scrollbar {
+  width: 5px;
+}
+.sidebar .sidebar-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.25);
+  border-radius: 10px;
+}
+.sidebar .sidebar-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ==========================================================
+   FIX FINAL — Semua modal form di aplikasi (Tambah Alat,
+   Tambah Aplikasi, Tambah OPD, Input Aset Diskominfo, dll)
+   ========================================================== */
+
+.modal.show:has(.card) {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+.modal-dialog {
+  margin: 20px auto !important;
+  max-height: calc(100vh - 40px);
+}
+
+.modal-content {
+  max-height: 92vh !important;
+  border-radius: 14px !important;
+  border: none !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.modal-content > .modal-header {
+  display: none !important;
+}
+
+.modal-content > form {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  flex: 1 1 auto;
+}
+
+.modal-content .card {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  flex: 1 1 auto;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+}
+
+.modal-content .card-header {
+  flex: 0 0 auto;
+}
+
+.modal-content .card-footer {
+  flex: 0 0 auto;
+}
+
+.modal-content .card-body,
+.modal-content .modal-body {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+.modal-content .card-body,
+.modal-content .modal-body {
+  touch-action: pan-y !important;
+}
+
+/* ==========================================================
+   FIX TAMBAHAN v13:
+   1. Foto jaringan.jpg CUMA di halaman Login (bukan landing page)
+   2. Hero landing page jadi warna terang (bukan gelap)
+   3. Statistik "Aset Tercatat" dihapus, diganti angka nempel
+      di "Data Aset" & "Data OPD", "Peta Jaringan" dihapus
+   4. Sticky navbar di semua halaman (Dashboard, Aset Umum, dll)
+   ========================================================== */
+
+/* ---------- Foto jaringan.jpg — CUMA di halaman Login ---------- */
+.page-header.login-page {
+  background-image: none !important;
+  background: linear-gradient(160deg,#082A47 0%,#0B3D66 55%,#124a75 100%) !important;
+}
+.login-photo-page .page-header.login-page {
+  background-image: linear-gradient(160deg, rgba(8,42,71,0.75) 0%, rgba(11,61,102,0.8) 100%),
+                     url('/img/jaringan.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+/* ---------- Hero landing page — warna terang, gak gelap ---------- */
+.simanja-hero {
+  background: linear-gradient(135deg, #EAF2FB 0%, #FFFFFF 100%) !important;
+  background-image:
+    radial-gradient(rgba(11,61,102,0.08) 1.5px, transparent 1.5px),
+    linear-gradient(135deg, #EAF2FB 0%, #FFFFFF 100%) !important;
+  background-size: 26px 26px, 100% 100% !important;
+  color: var(--simanja-text);
+}
+.simanja-hero::after {
+  background: var(--simanja-red) !important;
+  opacity: 0.12 !important;
+  width: 340px !important;
+  height: 340px !important;
+}
+.simanja-hero::before {
+  background: var(--simanja-blue) !important;
+  opacity: 0.09 !important;
+  width: 260px !important;
+  height: 260px !important;
+}
+.simanja-hero .hero-title {
+  color: var(--simanja-blue) !important;
+}
+.simanja-hero .hero-subtitle {
+  color: #5b6b7c !important;
+}
+
+/* ---------- Badge kecil di atas judul ---------- */
+.sm-hero-badge {
+  display: inline-block;
+  background: rgba(11,61,102,0.08);
+  color: var(--simanja-blue);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 8px 20px;
+  border-radius: 30px;
+  margin-bottom: 18px;
+  border: 1px solid rgba(11,61,102,0.15);
+}
+
+/* ---------- Highlight Data Aset / Data OPD (2 item, ada angka) ---------- */
+.hero-highlights {
+  gap: 70px;
+}
+.hero-highlight-item {
+  color: var(--simanja-blue) !important;
+}
+.hero-highlight-item i {
+  background: rgba(11,61,102,0.08) !important;
+  color: var(--simanja-blue) !important;
+}
+.hero-highlight-item:hover i {
+  background: var(--simanja-red) !important;
+  color: #fff !important;
+}
+.hero-highlight-item span {
+  color: var(--simanja-text) !important;
+  font-weight: 700 !important;
+}
+.hero-highlight-item small {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.72rem;
+  color: #8a94a6;
+  font-weight: 500;
+}
+
+/* ---------- Sticky navbar di semua halaman (Dashboard, Aset Umum, dll) ----------
+   Template aslinya bikin navbar position:absolute (ikut kescroll kebawah).
+   Ini di-override jadi fixed, disesuaikan sama lebar sidebar (260px) biar
+   gak nutupin sidebar-nya. */
+.navbar.navbar-absolute {
+  position: fixed !important;
+  top: 0;
+  left: 260px;
+  right: 0;
+  width: auto !important;
+  z-index: 1030;
+}
+.main-panel > .content {
+  padding-top: 30px;
 }
