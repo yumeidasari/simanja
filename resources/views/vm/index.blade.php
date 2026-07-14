@@ -153,46 +153,40 @@
 								</a>
 							</div>
 							<!-- modal Tampil Catatan -->
-									<div class="modal fade bd-example-modal-lg" id="modalTampilCatatan" tabindex="-1" aria-labelledby="modalTampilCatatan" aria-hidden="true">
-										<div class="modal-dialog modal-lg">
-											<div class="modal-content">
-												<div class="card">
-													<div class="card-header card-header-rose">
-														<h4 class="card-title ">{{ __('Petunjuk Import Data Host Server') }}</h4>
-													</div>
+							<div class="modal fade bd-example-modal-lg" id="modalTampilCatatan" tabindex="-1" aria-labelledby="modalTampilCatatan" aria-hidden="true">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="card sm-import-guide mb-0">
+											<div class="card-header card-header-rose">
+												<h4 class="card-title">
+													<i class="material-icons">info</i>
+													{{ __('Petunjuk Import Data Host Server') }}
+												</h4>
+											</div>
+											<div class="card-body">
+												<p class="sm-import-guide-title">1. Untuk header pada file Excel yang akan diimport, atributnya:</p>
+												<ul class="sm-import-guide-list">
+													<li><code>nama_alat</code></li>
+													<li><code>tipe</code><span class="sm-import-guide-note">diisi dengan 'VM WARE' atau 'PROXMOX'</span></li>
+													<li><code>model</code><span class="sm-import-guide-note">diisi dengan 'VM WARE' atau 'PROXMOX'</span></li>
+													<li><code>nama_host</code></li>
+													<li><code>ip_host</code></li>
+													<li><code>os_host</code></li>
+													<li><code>server_vm</code><span class="sm-import-guide-note">contoh: 10.10.10.3</span></li>
+												</ul>
+												<div class="sm-import-guide-warning">
+													<i class="material-icons">warning</i>
+													2. Semua atribut harus diisi (tidak boleh kosong)
 												</div>
-												<div class="row">
-													<div class="col-1">
-													</div>
-													<div class="col">
-															<b>1. Untuk Header pada File Excel yang akan diimport atributnya :</b><br>
-																<b>nama_alat</b>
-																<br>
-																<b>tipe</b> (Fieldnya diisi dengan 'VM WARE' atau PROXMOX)
-																<br>
-																<b>model</b> (Fieldnya diisi dengan 'VM WARE' atau PROXMOX)
-																<br>
-																<b>nama_host</b> 
-																<br>
-																<b>ip_host</b>
-																<br>
-																<b>os_host</b>
-																<br>
-																<b>server_vm</b> (Fieldnya diisi dengan nama servernya, Contoh : 10.10.10.3)
-																<br>
-																<br>
-															<b>2. Semua atribut harus diisi (tidak boleh kosong) </b>
-													</div>
-												</div>											
-												<div class="modal-footer  ml-auto mr-auto">
-													
-														<button type="button" class="btn btn-warning" data-dismiss="modal">OK</button>
-													
-												</div>
+											</div>
+											<div class="card-footer justify-content-center">
+												<button type="button" class="btn btn-warning" data-dismiss="modal">OK</button>
 											</div>
 										</div>
 									</div>
-									<!-- end modal-->
+								</div>
+							</div>
+							<!-- end modal-->
 						</div>
 						<hr>
                         <div class="table-responsive">

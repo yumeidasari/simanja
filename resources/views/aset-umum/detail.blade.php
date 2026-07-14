@@ -78,6 +78,11 @@
 										<input type="text" class="form-control" id="nama_barang" name="nama_barang" value="{{ $data[0]->nama_aset }}"  required>
 									</div>
 									<div class="form-group">
+										<label for="">Kode Barang</label>
+										<br>
+										<input type="text" class="form-control" id="kode_barang" name="kode_barang" value="{{ $data[0]->kode_barang }}" placeholder="cth. INV-2026-001">
+									</div>
+									<div class="form-group">
 										<label for="">Merek</label>
 										<br>
 										<input type="text" class="form-control" id="merek" name="merek" value="{{ $data[0]->merek }}"  required>

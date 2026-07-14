@@ -33,6 +33,10 @@
                   <input type="text" class="form-control" id="nama_barang" name="nama_barang" placeholder="cth. Laptop, Router, Kamera CCTV" required>
                 </div>
                 <div class="form-group">
+                  <label for="">Kode Barang</label>
+                  <input type="text" class="form-control" id="kode_barang" name="kode_barang" placeholder="cth. KB-001, KB-002" required>
+                </div>
+                <div class="form-group">
                   <label for="">Merek</label>
                   <input type="text" class="form-control" id="merek" name="merek" placeholder="cth. Cisco, Dell, HP" required>
                 </div>

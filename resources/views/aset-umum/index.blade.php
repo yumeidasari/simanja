@@ -57,18 +57,20 @@
 							</div>
 							
 							<div class="col-2 text-right">
-								
+
+								<a title="cetak laporan PDF" href="{{ route('aset-umum.laporan') }}" class="btn btn-sm btn-rose">
+									<i class="material-icons">picture_as_pdf</i>
+									<div class="ripple-container"></div>
+								</a>
+
                                 <a title="tambah data" href="#" class="btn btn-sm btn-rose" data-toggle="modal" data-target="#modalTambahAlat">
 									<i class="material-icons">add</i>
 									<div class="ripple-container"></div>
 								</a>
-								{{--	
-								<a title="eksport file" href="{{ route('alat.export') }}" class="btn btn-sm btn-rose">
-									<i class="material-icons">save_alt</i>
-									
+								<a title="export excel" href="{{ route('aset-umum.export') }}" class="btn btn-sm btn-rose">
+									<i class="material-icons">grid_on</i>
 									<div class="ripple-container"></div>
-								</a>
-								--}}							
+								</a>							
                             </div>
 							
 							
@@ -101,6 +103,10 @@
 														<div class="form-group">
 															<label for="">Nama Barang</label>
 															<input type="text" class="form-control" name="nama_barang" placeholder="cth. Laptop, Router, Kamera CCTV" required>
+														</div>
+														<div class="form-group">
+															<label for="">Kode Barang</label>
+															<input type="text" class="form-control" name="kode_barang" placeholder="cth. KB-001, KB-002" required>
 														</div>
 														<div class="form-group">
 															<label for="">Merek</label>
@@ -259,7 +265,7 @@
 									{{-- <td>{{ $semua_aset->firstItem() + $loop->index }} {{++$no + ($semua_aset->currentPage()-1) * $semua_aset->perPage()}}</td> --}}
 										<td>{{ $record->jenis_aset }}</td>
 										<td>
-											<a rel="tooltip"  href="{{ url("/aset-umum/detail/$record->id") }}" class="btn btn-primary btn-link" >
+											<a rel="tooltip" href="#" class="btn btn-primary btn-link" data-toggle="modal" data-target="#modalFoto{{ $record->id }}">
 												{{ $record->nama_aset }}
 											</a>
 										
@@ -275,18 +281,10 @@
 											<td><span class="badge badge-danger">{{ $record->kondisi_aset }}</span></td>
 										@endif
 										<td class="td-actions text-right">
-										{{--
-											<a rel="tooltip"  href='#' class="btn btn-warning btn-link" data-toggle="modal" data-target="#modalEditAlat{{ $record->id }}">
+											<a rel="tooltip" href="{{ url("/aset-umum/detail/$record->id") }}" class="btn btn-warning btn-link">
 												<i class="material-icons">edit</i>
 												<div class="ripple-container"></div>
 											</a>
-										--}}
-											{{--
-											<a rel="tooltip"  href="{{ url("/alat/detail2/$record->id") }}" class="btn btn-primary btn-link" >
-												<i class="material-icons">note</i>
-												<div class="ripple-container"></div>
-											</a>
-											--}}
 											<a rel="tooltip" href='#' class="btn btn-danger btn-link" data-toggle="modal" data-target="#modalHapusAlat{{ $record->id }}">
 												<i class="material-icons">delete</i>
 												<div class="ripple-container"></div>
@@ -301,7 +299,7 @@
 									{{-- <td>{{ $semua_aset->firstItem() + $loop->index }} {{++$no + ($semua_aset->currentPage()-1) * $semua_aset->perPage()}}</td> --}}
 										<td>{{ $record->jenis_aset }}</td>
 										<td>
-											<a rel="tooltip"  href="{{ url("/aset-umum/detail/$record->id") }}" class="btn btn-primary btn-link" >
+											<a rel="tooltip" href="#" class="btn btn-primary btn-link" data-toggle="modal" data-target="#modalFoto{{ $record->id }}">
 												{{ $record->nama_aset }}
 											</a>
 										
@@ -317,18 +315,10 @@
 											<td><span class="badge badge-danger">{{ $record->kondisi_aset }}</span></td>
 										@endif
 										<td class="td-actions text-right">
-										{{--
-											<a rel="tooltip"  href='#' class="btn btn-warning btn-link" data-toggle="modal" data-target="#modalEditAlat{{ $record->id }}">
+											<a rel="tooltip" href="{{ url("/aset-umum/detail/$record->id") }}" class="btn btn-warning btn-link">
 												<i class="material-icons">edit</i>
 												<div class="ripple-container"></div>
 											</a>
-										--}}
-											{{--
-											<a rel="tooltip"  href="{{ url("/alat/detail2/$record->id") }}" class="btn btn-primary btn-link" >
-												<i class="material-icons">note</i>
-												<div class="ripple-container"></div>
-											</a>
-											--}}
 											<a rel="tooltip" href='#' class="btn btn-danger btn-link" data-toggle="modal" data-target="#modalHapusAlat{{ $record->id }}">
 												<i class="material-icons">delete</i>
 												<div class="ripple-container"></div>
@@ -363,51 +353,22 @@
 										</div>
 									</div>
 									<!-- end modal-->
-									
-									<!-- modal UPDATE/EDIT ALAT -->
-									<div class="modal fade" id="modalEditAlat{{ $record->id }}" tabindex="-1" aria-labelledby="modalEditAlat" aria-hidden="true">
-									  <div class="modal-dialog">
-									   <div class="modal-content">
-										
-										<div class="card">
-											<div class="card-header card-header-rose">
-												<h5 class="card-title ">{{ __('Edit data Alat') }}</h4>
-												
+
+									<!-- modal foto aset -->
+									<div class="modal fade" id="modalFoto{{ $record->id }}" tabindex="-1" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered">
+											<div class="modal-content" style="background:transparent; box-shadow:none;">
+												<div class="modal-body text-center p-0">
+													@if(isset($semua_lampiran[$record->id]))
+														<img src="{{ asset('storage/'.$semua_lampiran[$record->id][0]->file_lampiran) }}" style="max-width:100%; border-radius:12px;">
+													@else
+														<div class="card"><div class="card-body text-center">Belum ada foto untuk aset ini.</div></div>
+													@endif
+												</div>
 											</div>
 										</div>
-										<div class="modal-body">
-										  <!--FORM UBAH ASET KANTOR-->
-										  <form action="{{url("aset-umum/$record->id")}}" method="post">
-											@csrf
-											@method('put')
-																						   
-											   <div class="form-group">
-												<label for="">Nama Alat</label>
-												<br>
-												<input type="text" class="form-control" id="nama_alat" name="nama_alat" value="{{ $record->nama_aset}}" aria-describedby="emailHelp">
-											   </div>
-											
-											   <div class="form-group">
-												<label for="">Tipe</label>
-												<br>
-												<input type="text" class="form-control" id="tipe" name="tipe" value="{{ $record->merek}}" aria-describedby="emailHelp">
-											   </div>
-											
-											   <div class="form-group">
-												<label for="">Model</label>
-												<br>
-												<input type="text" class="form-control" id="model" name="model" value="{{ $record->jenis_aset}}" aria-describedby="emailHelp">
-											   </div>
-											  
-											<button type="submit" class="btn btn-primary">Simpan Data</button>
-											<button type="button" class="btn btn-warning" data-dismiss="modal">Batal</button>
-										  </form>
-										  <!--END FORM UBAH ASET-->
-										</div>
-									   </div>
-								     </div>
 									</div>
-									<!-- end modal-->
+									<!-- end modal foto -->
 									
 									@endforeach
 									

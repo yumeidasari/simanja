@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Exports\AsetUmumExport;
 use App\Models\AsetUmum;
 use App\Models\UnitKerja;
 use App\Models\LampiranAset;
@@ -11,6 +12,7 @@ use App\Models\User;
 use Excel;
 use Illuminate\Support\Facades\DB;
 use Storage;
+use PDF;
 
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -36,7 +38,8 @@ class AsetUmumController extends Controller
 						//return response()->json(['data' => $semua_aset]);
 		//$semua_file = LampiranAset::all();
 		$data_bidang = UnitKerja::all();
-        return view('aset-umum.index', compact('semua_aset', 'data_bidang'));       
+		$semua_lampiran = LampiranAset::all()->groupBy('id_aset_kantor');
+        return view('aset-umum.index', compact('semua_aset', 'data_bidang', 'semua_lampiran'));       
     }
 	
 	public function formAset(){
@@ -69,6 +72,7 @@ class AsetUmumController extends Controller
 		
         $aset = new AsetUmum;  
         $aset->nama_aset = $request->nama_barang;
+		$aset->kode_barang = $request->kode_barang;
 		$aset->penanggung_jawab =$request->penanggung_jawab;
 		$aset->nip = $request->nip;
 		$aset->kondisi_aset = $request->kondisi_barang;
@@ -145,6 +149,7 @@ class AsetUmumController extends Controller
 	public function updateAsetUmum(Request $request, $id){
 		$aset = AsetUmum::findOrFail($id);
 		$aset->nama_aset = $request->nama_barang;
+		$aset->kode_barang = $request->kode_barang;
 		$aset->penanggung_jawab =$request->penanggung_jawab;
 		$aset->nip = $request->nip;
 		$aset->kondisi_aset = $request->kondisi_barang;
@@ -172,6 +177,25 @@ class AsetUmumController extends Controller
 		
 		alert()->success('Berhasil!', 'Data Aset berhasil diubah');
 		return back();
+	}
+	
+	public function cetakLaporan()
+	{
+		$data = DB::table('aset_kantor')
+					->join('unit_kerja', 'unit_kerja.id', '=', 'aset_kantor.id_unit_kerja')
+					->select('aset_kantor.*', 'unit_kerja.nama_unit_kerja as bidang')
+					->orderBy('unit_kerja.nama_unit_kerja')
+					->orderBy('aset_kantor.nama_aset')
+					->get();
+
+		$pdf = PDF::loadView('aset-umum.laporan', compact('data'))->setPaper('a4', 'landscape');
+		return $pdf->download('Laporan_Aset_Diskominfo_'.date('Y').'.pdf');
+		
+	}
+	
+	public function processExport()
+	{
+		return Excel::download(new AsetUmumExport, 'Data_Aset_Diskominfo_'.date('Y-m-d').'.xlsx');
 	}
 	
 }

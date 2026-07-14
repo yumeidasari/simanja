@@ -111,6 +111,8 @@ Route::group(['middleware' => 'auth'], function () {
 	
 	Route::any('/aset-umum/detail/{id}', [App\Http\Controllers\AsetUmumController::class, 'detailAsetUmum'])->name('detailAsetUmum');
 	Route::any('/aset-umum/update/{id}', [App\Http\Controllers\AsetUmumController::class, 'updateAsetUmum'])->name('updateAsetUmum');
+	Route::get('/aset-umum/laporan', [App\Http\Controllers\AsetUmumController::class, 'cetakLaporan'])->name('aset-umum.laporan');
+	Route::get('/aset-umum/export', [App\Http\Controllers\AsetUmumController::class, 'processExport'])->name('aset-umum.export');
 	Route::resource('aset-umum', 'App\Http\Controllers\AsetUmumController', ['except' => ['show']]);
 	
 	// Data Pegawai (khusus admin, dicek juga di PegawaiController)
