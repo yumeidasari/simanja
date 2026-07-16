@@ -1333,17 +1333,36 @@ footer a {
   font-weight: 500;
 }
 
-/* ---------- Sticky navbar di semua halaman (Dashboard, Aset Umum, dll) ----------
+/* ---------- Sticky navbar di halaman DASHBOARD (Dashboard, Aset Umum, dll) ----------
    Template aslinya bikin navbar position:absolute (ikut kescroll kebawah).
    Ini di-override jadi fixed, disesuaikan sama lebar sidebar (260px) biar
-   gak nutupin sidebar-nya. */
-.navbar.navbar-absolute {
+   gak nutupin sidebar-nya.
+   :not(.navbar-transparent) PENTING — biar rule ini gak ikut nyerempet
+   navbar landing page (yang gak punya sidebar), soalnya kalau ikut kena,
+   navbar landing bakal ke-geser left:260px dan bolong gak nyatu pas discroll. */
+.navbar.navbar-absolute:not(.navbar-transparent) {
   position: fixed !important;
   top: 0;
   left: 260px;
   right: 0;
   width: auto !important;
   z-index: 1030;
+}
+
+/* ---------- Sticky navbar KHUSUS landing page — full width, nempel rapi ---------- */
+.page-header.login-page .navbar.navbar-transparent.navbar-absolute {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100% !important;
+  z-index: 1030;
+  background-color: var(--simanja-blue) !important;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.18) !important;
+  transition: background-color .2s ease;
+}
+.page-header.login-page .simanja-hero-full {
+  padding-top: 100px;
 }
 .main-panel > .content {
   padding-top: 30px;
@@ -1558,4 +1577,27 @@ input[type="file"]::file-selector-button:hover {
   .sm-import-guide-list {
     grid-template-columns: 1fr;
   }
+}
+
+/* ==========================================================
+   FIX TAMBAHAN v17 — Navbar landing page kelihatan "gak nyatu"
+   pas discroll. Root cause: navbar-nya SEBENARNYA udah sticky
+   dari sononya (ada class bawaan Bootstrap "fixed-top" di HTML-nya),
+   tapi background-nya di-paksa transparent permanen sama rule CSS
+   paling awal (.navbar-transparent.navbar-absolute), jadi pas
+   discroll cuma logo & tombol Login yang keliatan "ngambang" tanpa
+   latar navy di belakangnya. Selector di bawah ini diambil PERSIS
+   dari class asli <nav> di HTML (navbar navbar-transparent
+   navbar-absolute fixed-top), jadi spesifisitasnya dijamin menang
+   ngelawan rule transparent di atas tadi.
+   ========================================================== */
+nav.navbar.navbar-transparent.navbar-absolute.fixed-top {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 1030 !important;
+  background-color: var(--simanja-blue) !important;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.18) !important;
 }
