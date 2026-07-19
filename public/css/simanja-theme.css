@@ -884,7 +884,9 @@ footer a {
 /* ---------- 2b. Container tabel dikasih sudut rounded biar nyatu sama card ---------- */
 .table-responsive {
   border-radius: 10px;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* ---------- 2c. Badge kondisi (baik/rusak) jadi pill modern ---------- */
@@ -1250,11 +1252,6 @@ footer a {
    4. Sticky navbar di semua halaman (Dashboard, Aset Umum, dll)
    ========================================================== */
 
-/* ---------- Foto jaringan.jpg — CUMA di halaman Login ---------- */
-.page-header.login-page {
-  background-image: none !important;
-  background: linear-gradient(160deg,#0B3D66 0%,#0B3D66 15%,#124a75 100%) !important;
-}
 .login-photo-page .page-header.login-page {
   background-image: linear-gradient(160deg, rgba(8,42,71,0.75) 0%, rgba(11,61,102,0.8) 100%),
                      url('/img/jaringan.jpg') !important;
@@ -1792,4 +1789,204 @@ html {
   .card-body .row > [class*="col-"] {
     margin-bottom: 8px;
   }
+}
+/* ==========================================================
+   FIX TAMBAHAN v24 — HP: jarak kosong gede di landing/login,
+   dan avatar profile yang nabrak di layar sempit
+   ========================================================== */
+
+@media (max-width: 575px) {
+  /* Hilangin jarak kosong gede sebelum footer di landing & login */
+  .page-header.login-page {
+    min-height: auto !important;
+    justify-content: flex-start !important;
+  }
+  .page-header.login-page .simanja-hero-full {
+    padding-top: 30px !important;
+    padding-bottom: 30px !important;
+  }
+  .page-header.login-page .footer {
+    margin-top: 30px !important;
+    padding-bottom: 20px !important;
+  }
+
+  /* Avatar profile jadi di tengah, di bawah judul (bukan nempel pojok) */
+  .card-header:has(.profile-avatar) {
+    text-align: center;
+    padding-bottom: 70px !important;
+  }
+  .profile-avatar {
+    position: static !important;
+    margin: 14px auto 0 !important;
+  }
+}
+/* ==========================================================
+   FIX TAMBAHAN v25 — Font & Responsive UNIVERSAL (semua halaman)
+   Target: ukuran font lebih kecil/proporsional di semua device,
+   dan tampilan gak berantakan di HP/tablet.
+   ========================================================== */
+
+/* ---------- 1. Base font lebih kecil di semua ukuran layar ---------- */
+html {
+  font-size: clamp(12.5px, 0.7vw + 9px, 14.5px) !important;
+}
+body {
+  font-size: 0.9rem !important;
+}
+
+/* ---------- 2. Heading & judul card — dikecilin merata ---------- */
+h1 { font-size: 1.8rem !important; }
+h2 { font-size: 1.5rem !important; }
+h3 { font-size: 1.3rem !important; }
+h4 { font-size: 1.15rem !important; }
+h5 { font-size: 1rem !important; }
+.card-title {
+  font-size: 1.05rem !important;
+}
+.card-category {
+  font-size: 0.8rem !important;
+}
+
+/* ---------- 3. Form: label, input, select, textarea, button ---------- */
+label,
+.form-control,
+.btn,
+select,
+textarea,
+input {
+  font-size: 0.85rem !important;
+}
+.btn-lg {
+  font-size: 0.9rem !important;
+}
+
+/* ---------- 4. Tabel — header & isi lebih kecil ---------- */
+.table th,
+.table td {
+  font-size: 0.82rem !important;
+}
+
+/* ---------- 5. Sidebar — teks menu lebih kecil ---------- */
+.sidebar .nav .nav-item > a,
+.sidebar .nav .nav-item > a p {
+  font-size: 0.8rem !important;
+}
+.sidebar .logo h3 {
+  font-size: 1.1rem !important;
+}
+
+/* ---------- 6. Navbar — teks & dropdown lebih kecil ---------- */
+.navbar-brand b {
+  font-size: 1rem !important;
+}
+.navbar-nav .dropdown-item {
+  font-size: 0.82rem !important;
+}
+
+
+/* ==========================================================
+   RESPONSIVE UNIVERSAL — Tablet (max-width: 991px)
+   ========================================================== */
+@media (max-width: 991px) {
+  .content {
+    padding: 15px !important;
+  }
+  .card-body {
+    padding: 20px !important;
+  }
+  .row [class*="col-"] {
+    margin-bottom: 10px;
+  }
+}
+
+/* ==========================================================
+   RESPONSIVE UNIVERSAL — HP (max-width: 575px)
+   ========================================================== */
+@media (max-width: 575px) {
+  html {
+    font-size: 12.5px !important;
+  }
+
+  /* Container & spacing lebih rapat */
+  .container, .container-fluid {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+  .card-header:not(.card-header-icon) {
+    padding: 16px 18px !important;
+  }
+  .card-body {
+    padding: 16px !important;
+  }
+  .card-footer {
+    padding: 14px 16px 20px !important;
+  }
+
+  /* Tombol full-width & rapi ditumpuk di HP */
+  .card-footer .btn,
+  .modal-content .card-footer .btn {
+    width: 100%;
+    margin: 4px 0 !important;
+  }
+
+  /* Toolbar search+tombol di halaman listing: tumpuk vertikal */
+  .card-body > .row > [class*="col-"] {
+    flex: 0 0 100%;
+    max-width: 100%;
+    text-align: left !important;
+  }
+  .card-body > .row > .text-right {
+    text-align: left !important;
+    margin-top: 8px;
+  }
+
+  /* Form 2 kolom (col-md-6) jadi 1 kolom penuh di HP */
+  .sm-form-card .col-md-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  /* Tabel: scroll horizontal, jangan numpuk/pecah */
+  .table-responsive {
+    -webkit-overflow-scrolling: touch;
+  }
+  .table th,
+  .table td {
+    white-space: nowrap;
+    padding: 8px 10px !important;
+  }
+
+  /* Navbar: logo & hamburger gak sempit */
+  .navbar.navbar-absolute:not(.navbar-transparent) {
+    left: 0 !important;
+  }
+  .navbar-brand img {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  /* Modal hampir full-screen, biar form gak sempit banget */
+  .modal-dialog {
+    margin: 6px !important;
+  }
+  .sm-form-card .card-body {
+    padding: 14px !important;
+  }
+}
+/* ==========================================================
+   FIX TAMBAHAN v26 — Jarak kosong gede di HP (semua halaman
+   dalam, bukan cuma landing) + judul halaman di navbar mobile
+   ========================================================== */
+@media (max-width: 991px) {
+  .main-panel {
+    min-height: auto !important;
+  }
+  .wrapper {
+    min-height: auto !important;
+  }
+}
+
+.navbar-brand {
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
 }
