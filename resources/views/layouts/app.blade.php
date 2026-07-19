@@ -19,7 +19,7 @@
     <link href="{{ asset('material') }}/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{ asset('material') }}/demo/demo.css" rel="stylesheet" />
-    <link href="{{ asset('css') }}/simanja-theme.css?v=6" rel="stylesheet" />
+    <link href="{{ asset('css') }}/simanja-theme.css?v=22" rel="stylesheet" />
 	
 	<!-- Datetimepicker -->
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

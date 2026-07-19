@@ -120,12 +120,12 @@ body {
 
 .page-header.login-page{
     background-image:none !important;
-    background:linear-gradient(160deg,#082A47 0%,#0B3D66 55%,#124a75 100%) !important;
+    background:linear-gradient(160deg,#0B3D66 0%,#0B3D66 15%,#124a75 100%) !important;
     min-height:100vh;
     display:flex;
     flex-direction:column;
     justify-content:space-between;
-    padding-top:90px;
+    padding-top:70px;
 }
 
 .page-header.login-page::before{
@@ -1253,7 +1253,7 @@ footer a {
 /* ---------- Foto jaringan.jpg — CUMA di halaman Login ---------- */
 .page-header.login-page {
   background-image: none !important;
-  background: linear-gradient(160deg,#082A47 0%,#0B3D66 55%,#124a75 100%) !important;
+  background: linear-gradient(160deg,#0B3D66 0%,#0B3D66 15%,#124a75 100%) !important;
 }
 .login-photo-page .page-header.login-page {
   background-image: linear-gradient(160deg, rgba(8,42,71,0.75) 0%, rgba(11,61,102,0.8) 100%),
@@ -1599,5 +1599,197 @@ nav.navbar.navbar-transparent.navbar-absolute.fixed-top {
   width: 100% !important;
   z-index: 1030 !important;
   background-color: var(--simanja-blue) !important;
-  box-shadow: 0 2px 15px rgba(0,0,0,0.18) !important;
+}
+/* ---------- FIX: Ukuran font kekecilin (sebelumnya didesain di zoom 75%) ---------- */
+.hero-title {
+  font-size: 2rem !important;
+}
+.hero-subtitle {
+  font-size: 1rem !important;
+}
+.sm-hero-badge {
+  font-size: 0.75rem !important;
+  padding: 8px 18px !important;
+}
+.hero-highlight-item span {
+  font-size: 0.8rem !important;
+}
+.hero-highlight-item small {
+  font-size: 0.72rem !important;
+}
+.btn-hero-cta {
+  font-size: 0.85rem !important;
+  padding: 13px 38px !important;
+}
+
+/* ---------- FIX: Logo + teks SIMANJA center vertikal, gak nempel bawah ---------- */
+.navbar-brand {
+  display: flex !important;
+  align-items: center !important;
+  height: 100%;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.navbar-wrapper {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.navbar-brand img {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+.navbar-brand b {
+  font-size: 1.1rem !important;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+}
+.navbar.navbar-absolute {
+  display: flex;
+  align-items: center;
+  min-height: 70px;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+/* ---------- FIX: hilangin garis dobel di bawah navbar landing ---------- */
+.page-header.login-page .navbar.navbar-absolute {
+  box-shadow: none !important;
+}
+.page-header.login-page::before,
+.page-header.login-page::after {
+  display: none !important;
+  content: none !important;
+}
+/* ==========================================================
+   FIX TAMBAHAN v22 — Ukuran font proporsional di semua ukuran
+   layar (sebelumnya didesain di zoom 75%, kegedean di zoom 100%)
+   + Responsive dasar buat HP, tablet, laptop
+   ========================================================== */
+
+/* ---------- Font scaling pakai clamp() — otomatis nyesuain
+   ukuran layar tanpa perlu media query manual buat tiap ukuran ---------- */
+html {
+  font-size: clamp(13px, 1vw + 8px, 15px);
+}
+
+/* ---------- Judul-judul besar, biar gak kegedean di HP ---------- */
+.hero-title {
+  font-size: clamp(1.4rem, 4vw + 0.5rem, 2.2rem) !important;
+  line-height: 1.25 !important;
+}
+.card-header:not(.card-header-icon) .card-title {
+  font-size: clamp(1rem, 2vw + 0.5rem, 1.25rem) !important;
+}
+.content .card-stats .card-title {
+  font-size: clamp(1.4rem, 3vw + 0.5rem, 1.8rem) !important;
+}
+.sm-dash-welcome h4 {
+  font-size: clamp(1.1rem, 3vw + 0.5rem, 1.4rem) !important;
+}
+
+/* ==========================================================
+   RESPONSIVE — Tablet (max-width: 991px)
+   ========================================================== */
+@media (max-width: 991px) {
+  .hero-highlights {
+    gap: 30px !important;
+  }
+  .content .card-stats {
+    margin-bottom: 16px;
+  }
+  .sm-dash-shortcuts {
+    flex-direction: column;
+  }
+  .sm-shortcut-card {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+  .sm-form-card .card-body {
+    padding: 20px !important;
+  }
+}
+
+/* ==========================================================
+   RESPONSIVE — HP (max-width: 575px)
+   ========================================================== */
+@media (max-width: 575px) {
+  /* Landing page */
+  .simanja-hero-full {
+    padding: 24px 16px !important;
+  }
+  .sm-hero-badge {
+    font-size: 0.65rem !important;
+    padding: 6px 14px !important;
+    text-align: center;
+  }
+  .btn-hero-cta {
+    width: 100%;
+    text-align: center;
+    padding: 14px 20px !important;
+  }
+  .hero-highlights {
+    gap: 20px !important;
+    justify-content: space-around;
+  }
+  .hero-highlight-item i {
+    padding: 12px;
+    font-size: 24px;
+  }
+
+  /* Navbar */
+  .navbar-brand b {
+    font-size: 0.95rem !important;
+  }
+  .navbar-brand img {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  .navbar.navbar-absolute:not(.navbar-transparent) {
+    left: 0 !important;
+  }
+
+  /* Card & konten utama */
+  .card-header:not(.card-header-icon) {
+    padding: 18px 20px !important;
+  }
+  .card-body {
+    padding: 18px 16px !important;
+  }
+  .content {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  /* Modal jadi hampir full-screen di HP */
+  .modal-dialog {
+    margin: 8px !important;
+    max-height: calc(100vh - 16px);
+  }
+  .modal-content {
+    max-height: calc(100vh - 16px) !important;
+  }
+  .sm-form-card .card-body {
+    padding: 16px !important;
+  }
+  .sm-form-card .row > [class*="col-"] {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  /* Tabel jadi bisa discroll horizontal, gak numpuk */
+  .table-responsive {
+    font-size: 0.78rem;
+  }
+  .content .table thead th,
+  .content .table tbody td {
+    padding: 10px 8px !important;
+    white-space: nowrap;
+  }
+
+  /* Toolbar tombol (search + PDF + tambah + excel) numpuk rapi ke bawah */
+  .card-body .row > [class*="col-"] {
+    margin-bottom: 8px;
+  }
 }
