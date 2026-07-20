@@ -2314,10 +2314,3 @@ input {
     margin-top: 10px;
   }
 }
-/* ==========================================================
-   TEST CSS - HAPUS SETELAH BERHASIL
-   ========================================================== */
-
-body {
-  border: 10px solid red !important;
-}
