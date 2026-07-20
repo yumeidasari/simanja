@@ -2210,49 +2210,57 @@ input {
 .table thead th {
   text-align: center !important;
 }
-/* ---------- FIX PASTI: search bar & toolbar tombol Aset Umum sejajar ---------- */
-.card-body > .row.align-items-center > [class*="col-"] {
-  display: flex;
-  align-items: center;
-}
-.card-body .bmd-form-group {
-  margin-bottom: 0 !important;
-  padding-top: 0 !important;
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-.card-body .custom-search-form {
-  margin: 0 !important;
-}
-/* ---------- FIX PASTI: search bar & toolbar tombol Aset Umum sejajar ---------- */
-.card-body > .row.align-items-center > [class*="col-"] {
-  display: flex;
-  align-items: center;
-}
-.card-body .bmd-form-group {
-  margin-bottom: 0 !important;
-  padding-top: 0 !important;
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-.card-body .custom-search-form {
-  margin: 0 !important;
-}
-.custom-search-form {
-    margin-bottom: 0 !important;
+/* =========================================================
+   FIX TOOLBAR ASET UMUM
+   Search + PDF + Tambah + Excel sejajar
+   ========================================================= */
+
+.card-body > .row.align-items-center {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
 }
 
-.custom-search-form .form-control {
-    height: 36px !important;
+/* Kolom search */
+.card-body > .row.align-items-center > .col-md-6:first-child {
+    flex: 1 1 auto !important;
+    width: auto !important;
+    max-width: none !important;
 }
 
-.custom-search-form .btn {
-    margin-top: 0 !important;
+/* Kolom tombol */
+.card-body > .row.align-items-center > .col-md-6:last-child {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    max-width: none !important;
+    white-space: nowrap !important;
+    text-align: right !important;
 }
 
-.d-flex.align-items-center .btn {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
+/* Search box */
+.card-body > .row.align-items-center .custom-search-form {
+    display: flex !important;
+    width: 100% !important;
+    max-width: 500px !important;
+    margin: 0 !important;
+}
+
+/* Tombol PDF, Tambah, Excel */
+.card-body > .row.align-items-center .btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    vertical-align: middle !important;
+    margin: 0 4px !important;
+}
+
+/* Ukuran tombol */
+.card-body > .row.align-items-center .btn-sm {
+    min-width: 60px !important;
+    height: 40px !important;
+}
+
+/* Supaya ikon berada di tengah */
+.card-body > .row.align-items-center .material-icons {
+    line-height: 1 !important;
 }
