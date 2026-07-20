@@ -133,7 +133,8 @@
                                                             <label>Jenis Barang</label>
 
                                                             <select name="jenis_barang"
-                                                                    class="form-control">
+                                                                    class="form-control"
+                                                                    required>
 
                                                                 <option value="">
                                                                     --Pilih Jenis Barang
@@ -280,7 +281,8 @@
                                                             <label>Unit Kerja / Bidang</label>
 
                                                             <select name="id_unit_kerja"
-                                                                    class="form-control">
+                                                                    class="form-control"
+                                                                    required>
 
                                                                 <option value="">
                                                                     --Pilih Unit Kerja
