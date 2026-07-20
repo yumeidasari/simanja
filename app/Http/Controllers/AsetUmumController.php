@@ -39,7 +39,8 @@ class AsetUmumController extends Controller
 		//$semua_file = LampiranAset::all();
 		$data_bidang = UnitKerja::all();
 		$semua_lampiran = LampiranAset::all()->groupBy('id_aset_kantor');
-        return view('aset-umum.index', compact('semua_aset', 'data_bidang', 'semua_lampiran'));       
+		$data_pegawai = Pegawai::all();
+        return view('aset-umum.index', compact('semua_aset', 'data_bidang', 'semua_lampiran', 'data_pegawai'));       
     }
 	
 	public function formAset(){

@@ -109,8 +109,12 @@
 									<div class="form-group">
 										<label for="">Nama Penanggung Jawab</label>
 										<br>
-										<input type="text" class="form-control" id="penanggung_jawab" name="penanggung_jawab" 
-											value="{{ $data[0]->penanggung_jawab }}" required>
+										<select class="form-control" name="penanggung_jawab" required>
+										  <option value="">--Pilih Penanggung Jawab</option>
+										  @foreach($data_pegawai as $pegawai)
+											<option value="{{ $pegawai->nama }}" {{ $data[0]->penanggung_jawab == $pegawai->nama ? 'selected' : '' }}>{{ $pegawai->nama }} ({{ $pegawai->bidang }})</option>
+										  @endforeach
+										</select>
 									</div>
 									
 									<div class="form-group">

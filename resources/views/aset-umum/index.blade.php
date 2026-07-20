@@ -249,10 +249,14 @@
                                                         <div class="form-group">
                                                             <label>Nama Penanggung Jawab</label>
 
-                                                            <input type="text"
-                                                                   class="form-control"
-                                                                   name="penanggung_jawab"
-                                                                   required>
+                                                            <select class="form-control"
+                                                                    name="penanggung_jawab"
+                                                                    required>
+                                                                <option value="">--Pilih Penanggung Jawab</option>
+                                                                @foreach($data_pegawai as $pegawai)
+                                                                    <option value="{{ $pegawai->nama }}">{{ $pegawai->nama }} ({{ $pegawai->bidang }})</option>
+                                                                @endforeach
+                                                            </select>
                                                         </div>
 
                                                     </div>
