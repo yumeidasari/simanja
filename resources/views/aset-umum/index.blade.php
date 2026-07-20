@@ -364,8 +364,7 @@
 
                                                                 <input type="file"
                                                                        name="file[]"
-                                                                       class="form-control"
-                                                                       required>
+                                                                       class="form-control">
 
                                                             </div>
 
