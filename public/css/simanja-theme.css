@@ -1990,3 +1990,253 @@ input {
   font-size: 1.05rem !important;
   font-weight: 700 !important;
 }
+/* ==========================================================
+   FIX TAMBAHAN v27:
+   1. Garis tabel keliatan jelas & modern di semua halaman
+   2. Tombol toolbar (Search/PDF/Excel/Tambah) dipaksa sejajar
+      1 baris, gak wrap turun lagi
+   ========================================================== */
+
+/* ---------- 1. Garis tabel modern, jelas, di semua halaman ---------- */
+.table {
+  border: 1px solid #dfe3ec !important;
+  border-collapse: collapse !important;
+}
+.table th,
+.table td {
+  border: 1px solid #e5e9f0 !important;
+}
+.table thead th {
+  border-bottom: 2px solid var(--simanja-blue) !important;
+  background-color: #f7f9fc;
+}
+.table tbody tr:nth-child(even) {
+  background-color: #fafbfd;
+}
+.table-responsive {
+  border: 1px solid #e5e9f0;
+  border-radius: 10px;
+}
+
+/* ---------- 2. Tombol toolbar dipaksa 1 baris, gak wrap ----------
+   Selector-nya dibikin lebih luas (nangkep semua kolom ".text-right"
+   di baris toolbar, bukan cuma ".col-2" doang) biar nangkep tombol
+   baru (Excel dll) di manapun dia ditaruh strukturnya. */
+.card-body > .row > [class*="col-"].text-right,
+.card-body .row > .text-right {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex: 1 1 auto !important;
+  max-width: 100% !important;
+  margin-top: 0 !important;
+}
+/* Kalau tombol2 itu ternyata masing-masing di kolom terpisah (bukan
+   1 kolom bareng), ini bikin baris row-nya sendiri gak pecah ke bawah */
+.card-body > .row {
+  flex-wrap: nowrap !important;
+  align-items: center;
+}
+@media (max-width: 767px) {
+  .card-body > .row {
+    flex-wrap: wrap !important;
+  }
+}
+/* ==========================================================
+   FIX TAMBAHAN v28 — Toolbar tombol kepotong/gak keliatan
+   Root cause: total lebar (search + tombol2) lebih lebar dari
+   card, dan card motong kelebihannya (overflow:hidden) tanpa
+   scroll. Fix: search input boleh nyusut duluan, tombol tetap
+   ukuran normal, dan dikasih scroll horizontal sebagai jaga-jaga.
+   ========================================================== */
+
+.card-body > .row {
+  flex-wrap: nowrap !important;
+  align-items: center;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+/* Kolom manapun di baris toolbar ini boleh nyusut di bawah
+   ukuran normalnya (defaultnya Bootstrap kolom gak mau nyusut) */
+.card-body > .row > [class*="col-"] {
+  min-width: 0;
+}
+
+/* Search input ikut nyusut ngikutin kolomnya, jangan maksa lebar penuh */
+.card-body .custom-search-form,
+.card-body .custom-search-form .input-group,
+.card-body .custom-search-form input {
+  min-width: 0;
+  width: 100%;
+}
+
+/* Kolom tombol: JANGAN dipaksa full-width lagi (itu yang kemarin
+   bikin dia "ngotot" minta tempat sampe kelebihan) — biarin dia
+   selebar isinya aja, gak nyusut, gak melar */
+.card-body > .row > [class*="col-"].text-right {
+  flex: 0 0 auto !important;
+  max-width: none !important;
+  width: auto !important;
+  white-space: nowrap;
+}
+/* ==========================================================
+   FIX TAMBAHAN v29:
+   1. Search box + tombol kaca pembesar balik sejajar 1 baris
+   2. Responsive HP/tablet: toolbar ditumpuk rapi ke bawah,
+      bukan di-scroll ke samping (lebih enak dipakai di HP)
+   ========================================================== */
+
+/* ---------- 1. Search box + tombol cari sejajar lagi ---------- */
+.card-body .custom-search-form,
+.card-body .custom-search-form .input-group {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: stretch;
+  width: auto;
+  max-width: 320px;
+}
+.card-body .custom-search-form input {
+  min-width: 0;
+  flex: 1 1 auto;
+  width: auto !important;
+}
+
+/* ---------- 2. Responsive: HP & tablet — tumpuk ke bawah, jangan di-scroll samping ---------- */
+@media (max-width: 767px) {
+  .card-body > .row {
+    flex-wrap: wrap !important;
+    overflow-x: visible !important;
+  }
+  .card-body > .row > [class*="col-"] {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 10px;
+  }
+  .card-body .custom-search-form,
+  .card-body .custom-search-form .input-group {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  .card-body > .row > [class*="col-"].text-right {
+    justify-content: flex-start !important;
+    flex-wrap: wrap !important;
+    white-space: normal;
+  }
+  /* tabel tetap boleh di-scroll samping di HP (ini yang wajar) */
+  .table-responsive {
+    overflow-x: auto !important;
+  }
+}
+/* ==========================================================
+   FIX TAMBAHAN v30:
+   1. Card di dalam modal dipaksa isi PENUH tinggi modal-nya,
+      biar footer (Simpan/Batal) bener-bener nempel di ujung
+      paling bawah — sebelumnya masih nyisa jarak kosong di
+      bawah footer karena card cuma setinggi isinya doang
+   2. Modal dikecilin & diturunin lebih jauh lagi
+   ========================================================== */
+
+.modal-content > form,
+.modal-content .card {
+  height: 100% !important;
+}
+
+.modal-dialog.modal-lg {
+  max-width: 600px !important;
+}
+.modal-dialog {
+  margin: 70px auto 30px !important;
+  max-height: 75vh !important;
+}
+.modal-content {
+  max-height: 75vh !important;
+  height: 75vh !important;
+}
+.modal-content .copy-aset.invisible {
+  display: none !important;
+}
+/* ==========================================================
+   FIX TAMBAHAN v32 — Perbaikan bug v30
+   Root cause: rule ".modal-content .card { height:100% }" kena
+   ke SEMUA .card di dalam modal, padahal beberapa modal (Aplikasi,
+   Wireless, Server, OPD, dll) strukturnya beda — card-nya cuma
+   bungkus HEADER doang, terpisah dari form-nya (.modal-body ada
+   di luar card itu). Akibatnya card kecil itu "digelembungin"
+   ngisi seluruh tinggi modal, dorong form aslinya turun jauh.
+   Fix: scope height:100% CUMA ke .card yang beneran punya
+   .card-body di dalamnya (pola Aset Umum), bukan sembarang .card.
+   ========================================================== */
+
+.modal-content .card {
+  height: auto !important;
+}
+.modal-content .card:has(> .card-body) {
+  height: 100% !important;
+}
+/* ==========================================================
+   FIX TAMBAHAN v33 — Perbaikan bug v30 (bagian 2)
+   Root cause: aturan "height: 75vh !important" di modal-dialog
+   & modal-content bikin SEMUA modal dipaksa setinggi 75% layar,
+   walaupun isinya cuma dikit (kayak "Tambah OPD" yang cuma 1
+   field) — jadi ada ruang kosong yang "harus diisi", kontennya
+   keliatan kedorong turun. Ditambah margin-top tetap (70px) yang
+   nge-override fitur "modal-dialog-centered" bawaan Bootstrap,
+   jadi modal gak lagi center di tengah layar, malah nempel tinggi.
+
+   Fix: modal auto-nyesuain tinggi sama isinya (cuma dibatasin
+   MAX tingginya biar gak kepanjangan buat form yang banyak field),
+   dan biarin Bootstrap yang center-in dia di tengah layar.
+   ========================================================== */
+
+.modal-dialog {
+  margin: 1.75rem auto !important;
+}
+.modal-dialog.modal-lg {
+  max-width: 600px !important;
+}
+.modal-content {
+  height: auto !important;
+  max-height: 85vh !important;
+}
+.modal-content .card {
+  height: auto !important;
+}
+/* ==========================================================
+   FIX TAMBAHAN v34 — Judul tabel rata tengah di semua halaman
+   ========================================================== */
+.table thead th {
+  text-align: center !important;
+}
+/* ---------- FIX PASTI: search bar & toolbar tombol Aset Umum sejajar ---------- */
+.card-body > .row.align-items-center > [class*="col-"] {
+  display: flex;
+  align-items: center;
+}
+.card-body .bmd-form-group {
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.card-body .custom-search-form {
+  margin: 0 !important;
+}
+/* ---------- FIX PASTI: search bar & toolbar tombol Aset Umum sejajar ---------- */
+.card-body > .row.align-items-center > [class*="col-"] {
+  display: flex;
+  align-items: center;
+}
+.card-body .bmd-form-group {
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.card-body .custom-search-form {
+  margin: 0 !important;
+}

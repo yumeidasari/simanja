@@ -25,20 +25,8 @@
                         <p class="card-category">{{ __('Form untuk mengelola data aset umum Diskomifo') }}</p>
                     </div>
                     <div class="card-body">
-                        <div class="row">
-							<div class="col-5">
-							<!-- IMPORT FILE -->
-							{{--							
-								<form action="{{route('alat.import')}}" method="post" enctype="multipart/form-data">
-							    @csrf
-                                  <input type="file" name="file" >
-								  <input type="submit" value="Import" class="btn btn-sm btn-rose">
-							    </form>
-							--}}
-							<!--END -->
-							</div>
-							
-							<div class="col-5">
+                        <div class="row align-items-center">
+							<div class="col-md-6">
 							<!--Form pencarian -->
 							
 								<form action="{{url('aset-umum')}}" method="GET">
@@ -56,7 +44,7 @@
 								
 							</div>
 							
-							<div class="col-2 text-right">
+							<div class="col-md-6 text-right">
 
 								<a title="cetak laporan PDF" href="{{ route('aset-umum.laporan') }}" class="btn btn-sm btn-rose">
 									<i class="material-icons">picture_as_pdf</i>
