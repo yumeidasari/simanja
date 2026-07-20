@@ -2264,3 +2264,53 @@ input {
 .card-body > .row.align-items-center .material-icons {
     line-height: 1 !important;
 }
+/* ==========================================================
+   FIX TOOLBAR ASET UMUM
+   Search kiri + tombol PDF, Excel, Tambah kanan
+   ========================================================== */
+
+.card-body > .row:has(.custom-search-form) {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+}
+
+.card-body > .row:has(.custom-search-form) > .col-md-6 {
+  flex: 0 0 50% !important;
+  max-width: 50% !important;
+}
+
+.card-body > .row:has(.custom-search-form) > .col-md-6:last-child {
+  display: flex !important;
+  justify-content: flex-end !important;
+}
+
+.card-body > .row:has(.custom-search-form) > .col-md-6:last-child > .d-flex {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 6px !important;
+}
+
+/* Search tidak terlalu lebar */
+.card-body > .row:has(.custom-search-form) .custom-search-form {
+  max-width: 320px;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .card-body > .row:has(.custom-search-form) {
+    flex-wrap: wrap !important;
+  }
+
+  .card-body > .row:has(.custom-search-form) > .col-md-6 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  .card-body > .row:has(.custom-search-form) > .col-md-6:last-child {
+    justify-content: flex-start !important;
+    margin-top: 10px;
+  }
+}
