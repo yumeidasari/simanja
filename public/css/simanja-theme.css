@@ -2314,3 +2314,6 @@ input {
     margin-top: 10px;
   }
 }
+body {
+    border: 10px solid red !important;
+}
