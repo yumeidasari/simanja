@@ -2240,3 +2240,19 @@ input {
 .card-body .custom-search-form {
   margin: 0 !important;
 }
+.custom-search-form {
+    margin-bottom: 0 !important;
+}
+
+.custom-search-form .form-control {
+    height: 36px !important;
+}
+
+.custom-search-form .btn {
+    margin-top: 0 !important;
+}
+
+.d-flex.align-items-center .btn {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
