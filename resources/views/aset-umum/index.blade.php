@@ -218,7 +218,7 @@
                                                                     class="form-control"
                                                                     required>
 
-                                                                <option selected>
+                                                                <option value="" selected disabled>
                                                                     --Pilih Tahun Pengadaan
                                                                 </option>
 

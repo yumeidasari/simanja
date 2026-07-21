@@ -54,7 +54,7 @@
                 <div class="form-group">
                   <label for="">Tahun Pengadaan</label>
                   <select name="thn_pengadaan" class="form-control" required>
-                    <option selected="selected">--Pilih Tahun Pengadaan</option>
+                      <option value="" selected disabled>--Pilih Tahun Pengadaan</option>
                     <?php
                     for($i=date('Y')+1; $i>=date('Y')-30; $i-=1){
                     echo"<option value='$i'> $i </option>";
