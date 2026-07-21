@@ -192,7 +192,7 @@
                                                                     class="form-control"
                                                                     required>
 
-                                                                <option value="">
+                                                                <option value="" disabled selected>
                                                                     --Kondisi Barang
                                                                 </option>
 
@@ -218,7 +218,7 @@
                                                                     class="form-control"
                                                                     required>
 
-                                                                <option value="" selected disabled>
+                                                                <option value="" disabled selected>
                                                                     --Pilih Tahun Pengadaan
                                                                 </option>
 

@@ -63,6 +63,19 @@ class AsetUmumController extends Controller
 	
 	public function store(Request $request)
     {
+		$request->validate([
+			'nama_barang' => 'required',
+			'kode_barang' => 'required',
+			'penanggung_jawab' => 'required',
+			'nip' => 'required',
+			'kondisi_barang' => 'required',
+			'jenis_barang' => 'required',
+			'merek' => 'required',
+			'id_unit_kerja' => 'required',
+			'thn_pengadaan' => 'required',
+			'deskripsi' => 'required',
+		]);
+
 		if ($request->hasFile('file')) {
 			$request->validate([
 
@@ -148,6 +161,19 @@ class AsetUmumController extends Controller
 	}
 	
 	public function updateAsetUmum(Request $request, $id){
+		$request->validate([
+			'nama_barang' => 'required',
+			'kode_barang' => 'required',
+			'penanggung_jawab' => 'required',
+			'nip' => 'required',
+			'kondisi_barang' => 'required',
+			'jenis_barang' => 'required',
+			'merek' => 'required',
+			'id_unit_kerja' => 'required',
+			'thn_pengadaan' => 'required',
+			'deskripsi' => 'required',
+		]);
+
 		$aset = AsetUmum::findOrFail($id);
 		$aset->nama_aset = $request->nama_barang;
 		$aset->kode_barang = $request->kode_barang;

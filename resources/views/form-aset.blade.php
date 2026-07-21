@@ -23,7 +23,7 @@
                 <div class="form-group">
                   <label for="">Jenis Barang</label>
                   <select name="jenis_barang" class="form-control">
-                    <option value="">--Pilih Jenis Barang</option>
+                    <option value="" disabled selected>--Pilih Jenis Barang</option>
                     <option value="kendaraan">Kendaraan</option>
                     <option value="elektronik">Barang Elektronik</option>
                   </select>
@@ -45,7 +45,7 @@
                 <div class="form-group">
                   <label for="">Kondisi Barang</label>
                   <select name="kondisi_barang" class="form-control" required>
-                    <option value="">--Kondisi Barang</option>
+                    <option value="" disabled selected>--Pilih Kondisi Barang</option>
                     <option value="baik">Baik</option>
                     <option value="rusak ringan">Rusak Ringan</option>
                     <option value="rusak berat">Rusak Berat</option>
@@ -54,7 +54,7 @@
                 <div class="form-group">
                   <label for="">Tahun Pengadaan</label>
                   <select name="thn_pengadaan" class="form-control" required>
-                      <option value="" selected disabled>--Pilih Tahun Pengadaan</option>
+                      <option value="" disabled selected>--Pilih Tahun Pengadaan</option>
                     <?php
                     for($i=date('Y')+1; $i>=date('Y')-30; $i-=1){
                     echo"<option value='$i'> $i </option>";
