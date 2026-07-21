@@ -1,7 +1,5 @@
 /* ==========================================================
-   SIMANJA - Custom Theme (Modern Government Blue/Red)
-   File ini di-load SETELAH material-dashboard.css,
-   supaya aturan di sini menang (override).
+   SIMANJA - Custom Theme (Modern Government Blue/Red).
    ========================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap');
@@ -1330,13 +1328,7 @@ footer a {
   font-weight: 500;
 }
 
-/* ---------- Sticky navbar di halaman DASHBOARD (Dashboard, Aset Umum, dll) ----------
-   Template aslinya bikin navbar position:absolute (ikut kescroll kebawah).
-   Ini di-override jadi fixed, disesuaikan sama lebar sidebar (260px) biar
-   gak nutupin sidebar-nya.
-   :not(.navbar-transparent) PENTING — biar rule ini gak ikut nyerempet
-   navbar landing page (yang gak punya sidebar), soalnya kalau ikut kena,
-   navbar landing bakal ke-geser left:260px dan bolong gak nyatu pas discroll. */
+/* ---------- Sticky navbar di halaman DASHBOARD (Dashboard, Aset Umum, dll) ---------- */
 .navbar.navbar-absolute:not(.navbar-transparent) {
   position: fixed !important;
   top: 0;
@@ -1578,15 +1570,7 @@ input[type="file"]::file-selector-button:hover {
 
 /* ==========================================================
    FIX TAMBAHAN v17 — Navbar landing page kelihatan "gak nyatu"
-   pas discroll. Root cause: navbar-nya SEBENARNYA udah sticky
-   dari sononya (ada class bawaan Bootstrap "fixed-top" di HTML-nya),
-   tapi background-nya di-paksa transparent permanen sama rule CSS
-   paling awal (.navbar-transparent.navbar-absolute), jadi pas
-   discroll cuma logo & tombol Login yang keliatan "ngambang" tanpa
-   latar navy di belakangnya. Selector di bawah ini diambil PERSIS
-   dari class asli <nav> di HTML (navbar navbar-transparent
-   navbar-absolute fixed-top), jadi spesifisitasnya dijamin menang
-   ngelawan rule transparent di atas tadi.
+   pas discroll.
    ========================================================== */
 nav.navbar.navbar-transparent.navbar-absolute.fixed-top {
   position: fixed !important;
@@ -2045,11 +2029,7 @@ input {
   }
 }
 /* ==========================================================
-   FIX TAMBAHAN v28 — Toolbar tombol kepotong/gak keliatan
-   Root cause: total lebar (search + tombol2) lebih lebar dari
-   card, dan card motong kelebihannya (overflow:hidden) tanpa
-   scroll. Fix: search input boleh nyusut duluan, tombol tetap
-   ukuran normal, dan dikasih scroll horizontal sebagai jaga-jaga.
+   FIX TAMBAHAN v28 — Toolbar tombol kepotong/gak keliatan.
    ========================================================== */
 
 .card-body > .row {
@@ -2159,15 +2139,7 @@ input {
   display: none !important;
 }
 /* ==========================================================
-   FIX TAMBAHAN v32 — Perbaikan bug v30
-   Root cause: rule ".modal-content .card { height:100% }" kena
-   ke SEMUA .card di dalam modal, padahal beberapa modal (Aplikasi,
-   Wireless, Server, OPD, dll) strukturnya beda — card-nya cuma
-   bungkus HEADER doang, terpisah dari form-nya (.modal-body ada
-   di luar card itu). Akibatnya card kecil itu "digelembungin"
-   ngisi seluruh tinggi modal, dorong form aslinya turun jauh.
-   Fix: scope height:100% CUMA ke .card yang beneran punya
-   .card-body di dalamnya (pola Aset Umum), bukan sembarang .card.
+   FIX TAMBAHAN v32 — Perbaikan bug v30.
    ========================================================== */
 
 .modal-content .card {
@@ -2177,18 +2149,8 @@ input {
   height: 100% !important;
 }
 /* ==========================================================
-   FIX TAMBAHAN v33 — Perbaikan bug v30 (bagian 2)
-   Root cause: aturan "height: 75vh !important" di modal-dialog
-   & modal-content bikin SEMUA modal dipaksa setinggi 75% layar,
-   walaupun isinya cuma dikit (kayak "Tambah OPD" yang cuma 1
-   field) — jadi ada ruang kosong yang "harus diisi", kontennya
-   keliatan kedorong turun. Ditambah margin-top tetap (70px) yang
-   nge-override fitur "modal-dialog-centered" bawaan Bootstrap,
-   jadi modal gak lagi center di tengah layar, malah nempel tinggi.
-
-   Fix: modal auto-nyesuain tinggi sama isinya (cuma dibatasin
-   MAX tingginya biar gak kepanjangan buat form yang banyak field),
-   dan biarin Bootstrap yang center-in dia di tengah layar.
+   FIX TAMBAHAN v33 — Perbaikan bug bikin SEMUA modal dipaksa 
+   setinggi 75% layar, walaupun isinya cuma dikit. 
    ========================================================== */
 
 .modal-dialog {
@@ -2344,4 +2306,50 @@ nav.navbar.navbar-transparent.navbar-absolute.fixed-top .nav-link {
   display: flex !important;
   align-items: center !important;
   height: auto;
+}
+/* ==========================================================
+   FIX TAMBAHAN v36 — Navbar center vertikal.
+   ========================================================== */
+nav.navbar.navbar-transparent.navbar-absolute {
+  height: 76px !important;
+  min-height: 76px !important;
+  padding: 0 !important;
+}
+nav.navbar.navbar-transparent.navbar-absolute .container {
+  position: relative !important;
+  height: 100%;
+}
+nav.navbar.navbar-transparent.navbar-absolute .navbar-wrapper {
+  position: absolute !important;
+  top: 50% !important;
+  left: 0 !important;
+  transform: translateY(-50%) !important;
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+nav.navbar.navbar-transparent.navbar-absolute .navbar-wrapper .navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+nav.navbar.navbar-transparent.navbar-absolute .navbar-wrapper img {
+  height: 40px;
+  width: auto;
+}
+nav.navbar.navbar-transparent.navbar-absolute .collapse.navbar-collapse {
+  position: absolute !important;
+  top: 50% !important;
+  right: 0 !important;
+  transform: translateY(-50%) !important;
+  display: flex;
+  align-items: center;
+}
+nav.navbar.navbar-transparent.navbar-absolute .navbar-nav {
+  display: flex;
+  align-items: center;
+  margin: 0 !important;
 }
