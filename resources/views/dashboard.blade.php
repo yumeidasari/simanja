@@ -8,6 +8,10 @@
           <h4>Halo, {{ auth()->user()->name }} 👋</h4>
           <p>Berikut ringkasan data aset & jaringan IT Diskominfo Beltim.</p>
         </div>
+        <div class="sm-dash-welcome-date">
+          <i class="material-icons" style="font-size:16px; vertical-align:-3px;">calendar_today</i>
+          {{ \Carbon\Carbon::now()->translatedFormat('l, d F Y') }}
+        </div>
       </div>
       
       <div class="sm-dash-shortcuts">
@@ -40,7 +44,7 @@
               <div class="card-icon">
                 <i class="material-icons">router</i>
               </div>
-              <p class="card-category">Peralatan Jaringan</p>
+              <p class="card-category">Peralatan<br>Jaringan</p>
               <h3 class="card-title">{{$jml_jaringan}}</h3>
             </div>
           </div>

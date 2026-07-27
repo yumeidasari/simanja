@@ -2390,6 +2390,15 @@ nav.navbar.navbar-transparent.navbar-absolute .navbar-nav {
   margin-bottom: 16px;
   width: fit-content;
 }
+
+/* ---------- FIX: konten kartu Total Aset rata kiri, tetap center vertikal ---------- */
+.sm-aset-total-card {
+  text-align: left !important;
+  align-items: flex-start !important;
+}
+.sm-aset-total-card p {
+  margin-bottom: 0 !important;
+}
 .sm-aset-total-card h2 {
   font-family: 'Montserrat', sans-serif;
   font-weight: 800;
@@ -2459,4 +2468,118 @@ nav.navbar.navbar-transparent.navbar-absolute .navbar-nav {
     margin-bottom: 20px;
     min-height: auto;
   }
+}
+
+/* ---------- FIX: teks "© 2026" di footer disamain bold & warnanya
+   sama kayak "Diskominfo Kabupaten Belitung Timur" di sebelahnya ---------- */
+.footer .copyright,
+footer .copyright {
+  font-weight: 700 !important;
+  color: var(--simanja-blue) !important;
+}
+.footer .copyright a,
+footer .copyright a {
+  font-weight: 700 !important;
+  color: var(--simanja-blue) !important;
+}
+/* ==========================================================
+   FIX TAMBAHAN v38 — Samain tinggi kartu statistik dashboard
+   ========================================================== */
+.content .card-stats .card-category {
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Icon lebih "hidup" - sedikit membesar & shadow pas hover kartu */
+.content .card-stats:hover .card-icon {
+  transform: scale(1.08);
+  transition: transform 0.25s ease;
+}
+.content .card-stats .card-icon {
+  transition: transform 0.25s ease;
+}
+
+/* Angka statistik: kasih sedikit gradient text biar lebih "premium" */
+.content .card-stats .card-title {
+  background: linear-gradient(90deg, var(--simanja-text), var(--simanja-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+/* ==========================================================
+   FIX TAMBAHAN v39 — Dashboard Admin lebih hidup & menarik
+   ========================================================== */
+
+/* Border kiri berwarna sesuai jenis kartu (bukan cuma icon-nya doang) */
+.content .card-stats {
+  border-left: 4px solid transparent;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.content .card-header-warning ~ .card-stats,
+.card-stats:has(.card-header-warning) { border-left-color: #ff7043; }
+.card-stats:has(.card-header-success) { border-left-color: #16a085; }
+.card-stats:has(.card-header-danger)  { border-left-color: var(--simanja-red); }
+.card-stats:has(.card-header-info)    { border-left-color: var(--simanja-blue); }
+
+/* Angka statistik jadi jauh lebih besar & tegas, gradient tetap ada tapi lebih pekat */
+.content .card-stats .card-title {
+  font-size: 2.6rem !important;
+  font-weight: 800 !important;
+  background: linear-gradient(90deg, var(--simanja-blue), var(--simanja-blue-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Icon jadi lebih besar & bulat sempurna, kasih efek glow tipis */
+.content .card-stats .card-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+}
+.content .card-stats .card-icon .material-icons {
+  font-size: 30px;
+}
+
+/* Kartu shortcut (Aset Umum / Peta Jaringan) dikasih ikon panah,
+   biar keliatan jelas itu clickable/ajakan, bukan cuma info doang */
+.sm-shortcut-card {
+  position: relative;
+}
+.sm-shortcut-card::after {
+  content: "\2192";
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: var(--simanja-blue);
+  opacity: 0;
+  transition: opacity 0.2s ease, right 0.2s ease;
+}
+.sm-shortcut-card:hover::after {
+  opacity: 1;
+  right: 16px;
+}
+
+/* Banner "Halo, ..." dikasih ikon dekorasi jam/tanggal biar lebih informatif */
+.sm-dash-welcome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.sm-dash-welcome-date {
+  background: rgba(255,255,255,0.12);
+  padding: 8px 18px;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+  white-space: nowrap;
 }
