@@ -6,6 +6,7 @@ use App\Models\RefOPD;
 use App\Models\JaringanOpd;
 use App\Models\Wireless;
 use App\Models\LogUser;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -37,7 +38,24 @@ class HomeController extends Controller
     public function index()
     {
 		$this->logUser(auth()->user()->id, 'Login');
-		
+
+		// ---------- Dashboard USER: fokus breakdown Aset Umum ----------
+		if (auth()->user()->role == 'USER') {
+
+			$asetQuery = DB::table('aset_kantor')
+						->where('id_unit_kerja', auth()->user()->id_bidang);
+
+			$jml_aset_total = (clone $asetQuery)->count();
+			$jml_aset_baik = (clone $asetQuery)->where('kondisi_aset', 'baik')->count();
+			$jml_aset_rusak_ringan = (clone $asetQuery)->where('kondisi_aset', 'rusak ringan')->count();
+			$jml_aset_rusak_berat = (clone $asetQuery)->where('kondisi_aset', 'rusak berat')->count();
+
+			return view('dashboard-user', compact(
+				'jml_aset_total', 'jml_aset_baik', 'jml_aset_rusak_ringan', 'jml_aset_rusak_berat'
+			));
+		}
+
+		// ---------- Dashboard ADMIN: tampilan lengkap seperti sebelumnya ----------
 		$opd = RefOPD::all();
 		$jml_opd = count($opd);
 		
@@ -110,75 +128,6 @@ class HomeController extends Controller
             "orientation" => "horizontal"
         ]);
 		
-		
-		// aset by kondisi
-
-		/*
-        $aset_by_kondisi = Aset::groupBy('kondisi')
-            ->select('kondisi', \DB::raw('count(*) as count'))
-            ->get();
-
-        $byKondisiTable = \Lava::DataTable();
-
-        $byKondisiTable
-            ->addStringColumn('kondisi')
-            ->addNumberColumn('percent');
-
-        foreach ($aset_by_kondisi as $kondisi) 
-		{
-            $byKondisiTable->addRow([$kondisi->kondisi, $kondisi->count / $aset_count]);
-        }
-
-        $pieByKondisi = \Lava::PieChart('pie_by_kondisi', $byKondisiTable);
-
-        // aset by kategori
-
-        $aset_by_kategori = Aset::with('kategori')->get()->map(function ($aset) {
-            $aset->nama_kategori = $aset->kategori->nama_kategori;
-            return $aset;
-        })->groupBy('nama_kategori');
-
-        $byKategoriTable = \Lava::DataTable()
-            ->addStringColumn('kategori')
-            ->addNumberColumn('jumlah');
-
-        foreach ($aset_by_kategori as $kategori) {
-            $nama_kategori = $kategori->pluck('nama_kategori')[0];
-            $byKategoriTable->addRow([$nama_kategori, count($kategori)]);
-        }
-
-        $pieByKategori = \Lava::PieChart('pie_by_kategori', $byKategoriTable, [
-            "title" => "Aset berdasarkan kategori",
-            "orientation" => "horizontal"
-        ]);
-
-
-        // aset by satker
-        $aset_by_satker = Aset::with('satker')->get()->map(function ($aset) {
-            $aset->nama_satker = $aset->satker->nama_satker;
-            return $aset;
-        })->groupBy('nama_satker');
-
-        $byKategoriTable = \Lava::DataTable()
-            ->addStringColumn('satker')
-            ->addNumberColumn('jumlah');
-
-        foreach ($aset_by_satker as $satker) {
-            $nama_satker = $satker->pluck('nama_satker')[0];
-            $byKategoriTable->addRow([$nama_satker, count($satker)]);
-        }
-
-        $pieBySatker = \Lava::PieChart('pie_by_satker', $byKategoriTable, [
-            "title" => "Aset berdasarkan satker",
-            "orientation" => "horizontal"
-        ]);
-		
-        return view('aset/charts', compact('pieByJenis', 'pieByKondisi', 'pieByKategori', 'pieBySatker'));
-
-		*/
-		//return view('aset/charts', compact('pieByJenis'));
-		//-------------------------------------------------------------
         return view('dashboard', compact('jml_opd', 'jml_aplikasi', 'jml_wireless', 'jml_jaringan', 'pieByJenis', 'pieByOpd'));
-		//return view('dashboard', compact('jml_opd', 'jml_aplikasi', 'jml_wireless', 'jml_jaringan'));
     }
 }
