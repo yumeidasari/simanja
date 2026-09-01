@@ -1,4 +1,4 @@
-@extends('layouts.app', ['class' => 'off-canvas-sidebar', 'activePage' => 'login', 'title' => __('Material Dashboard')])
+@extends('layouts.app', ['class' => 'off-canvas-sidebar login-photo-page', 'activePage' => 'login', 'title' => __('Login')])
 
 @section('content')
 <div class="container" style="height: auto;">
@@ -73,20 +73,15 @@
           </div>
         </div>
       </form>
-      <!--div class="row">
-        <div class="col-6">
-            @if (Route::has('password.request'))
-                <a href="{{ route('password.request') }}" class="text-light">
-                    <small>{{ __('Forgot password?') }}</small>
-                </a>
-            @endif
-        </div>
-        <div class="col-6 text-right">
-            <a href="{{ route('register') }}" class="text-light">
-                <small>{{ __('Create new account') }}</small>
+      @if (Route::has('password.request'))
+      <div class="row">
+        <div class="col-12 text-right">
+            <a href="{{ route('password.request') }}" class="text-light">
+                <small>{{ __('Forgot password?') }}</small>
             </a>
         </div>
-      </div-->
+      </div>
+      @endif
     </div>
   </div>
 </div>

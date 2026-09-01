@@ -43,7 +43,7 @@
         <a class="nav-link" data-toggle="collapse" href="#laravelExample" aria-expanded="true">
           <!--i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i-->
 		  <!--i class="material-icons">line_weight</i-->
-          <p style="background-color:pink;"><i class="material-icons">line_weight</i>{{ __('Data User') }}
+          <p><i class="material-icons">line_weight</i>{{ __('Data User') }}
             <b class="caret"></b>
           </p>
         </a>
@@ -55,7 +55,7 @@
 				<lord-icon
 					src="https://cdn.lordicon.com/imamsnbq.json"
 					trigger="loop"
-					colors="primary:#121331,secondary:#08a88a"
+					colors="primary:#ffffff,secondary:#60a5fa"
 					style="width:30px;height:30px">
 				</lord-icon>
                 &nbsp;{{ __('User profile') }} 
@@ -83,7 +83,7 @@
         <a class="nav-link" data-toggle="collapse" href="#dataAset" aria-expanded="true">
           <!--i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i-->
 		  <!--i class="material-icons">table_view</i-->
-          <p style="background-color:pink;"><i class="material-icons">table_view</i>{{ __('Data Aset') }}
+          <p><i class="material-icons">table_view</i>{{ __('Data Aset') }}
             <b class="caret"></b>
           </p>
         </a>
@@ -170,11 +170,11 @@
       </li>
 	  
 	 @if(\Gate::allows('ADMIN')) 
-	  <li class="nav-item {{ ($activePage == 'opd' || $activePage == 'alat') ? ' active' : '' }}">
+	  <li class="nav-item {{ ($activePage == 'opd' || $activePage == 'alat' || $activePage == 'pegawai') ? ' active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#dataReferensi" aria-expanded="true">
           <!--i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i-->
 		  <!--i class="material-icons">library_books</i-->
-          <p style="background-color:pink;"><i class="material-icons">library_books</i>{{ __('Data Referensi') }}
+          <p><i class="material-icons">library_books</i>{{ __('Data Referensi') }}
             <b class="caret"></b>
           </p>
         </a>
@@ -202,6 +202,12 @@
 					style="width:30px;height:30px">
 				</lord-icon>
                 &nbsp; {{ __('Alat') }} 
+              </a>
+            </li>
+            <li class="nav-item{{ $activePage == 'pegawai' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('pegawai.index') }}">
+                <i class="material-icons">badge</i>
+                &nbsp; {{ __('Pegawai') }}
               </a>
             </li>
           </ul>

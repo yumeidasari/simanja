@@ -78,6 +78,11 @@
 										<input type="text" class="form-control" id="nama_barang" name="nama_barang" value="{{ $data[0]->nama_aset }}"  required>
 									</div>
 									<div class="form-group">
+										<label for="">Kode Barang</label>
+										<br>
+										<input type="text" class="form-control" id="kode_barang" name="kode_barang" value="{{ $data[0]->kode_barang }}" placeholder="cth. INV-2026-001">
+									</div>
+									<div class="form-group">
 										<label for="">Merek</label>
 										<br>
 										<input type="text" class="form-control" id="merek" name="merek" value="{{ $data[0]->merek }}"  required>
@@ -104,8 +109,12 @@
 									<div class="form-group">
 										<label for="">Nama Penanggung Jawab</label>
 										<br>
-										<input type="text" class="form-control" id="penanggung_jawab" name="penanggung_jawab" 
-											value="{{ $data[0]->penanggung_jawab }}" required>
+										<select class="form-control" name="penanggung_jawab" required>
+										  <option value="">--Pilih Penanggung Jawab</option>
+										  @foreach($data_pegawai as $pegawai)
+											<option value="{{ $pegawai->nama }}" {{ $data[0]->penanggung_jawab == $pegawai->nama ? 'selected' : '' }}>{{ $pegawai->nama }} ({{ $pegawai->bidang }})</option>
+										  @endforeach
+										</select>
 									</div>
 									
 									<div class="form-group">

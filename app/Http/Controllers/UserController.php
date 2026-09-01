@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UnitKerja;
 use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -29,7 +30,8 @@ class UserController extends Controller
 	public function create()
     {
         //$this->authorize('kelola-user');
-        return view('users.create');
+        $data_bidang = UnitKerja::all();
+        return view('users.create', compact('data_bidang'));
     }
 	
 	public function store(UserRequest $request)
@@ -40,6 +42,8 @@ class UserController extends Controller
         $user->name=$request->name;
         $user->email=$request->email;
         $user->password=Hash::make($request->password);
+		$user->role=$request->role;
+		$user->id_bidang=$request->id_bidang;
 		$user->email_verified_at = Carbon::now();
         $user->save();
 		//return response()->json(['data' => $user]);
@@ -50,18 +54,23 @@ class UserController extends Controller
     {
         //$this->authorize('kelola-user');
         $user=User::findOrFail($id);
+        $data_bidang = UnitKerja::all();
         
-        return view('users.edit',compact('user'));
+        return view('users.edit',compact('user', 'data_bidang'));
     }
 	
-	public function update(Request $request, $id)
+	public function update(UserRequest $request, $id)
     {
         //$this->authorize('kelola-user');
 		$user=User::findOrFail($id);
 		        
         $user->name=$request->name;
         $user->email=$request->email;
-        $user->password=Hash::make($request->password);
+		if ($request->filled('password')) {
+			$user->password=Hash::make($request->password);
+		}
+		$user->role=$request->role;
+		$user->id_bidang=$request->id_bidang;
 		//$user->email_verified_at = Carbon::now();
         $user->save();
 		//return response()->json(['data' => $user]);
@@ -72,8 +81,12 @@ class UserController extends Controller
     {
        // $this->authorize('kelola-user');
         $user=User::findOrFail($id);
-        $user->delete();
-        return redirect()->to('user')->with('message','Berhasil Hapus data User');
+        try {
+            $user->delete();
+            return redirect()->to('user')->with('message','Berhasil Hapus data User');
+        } catch (\Illuminate\Database\QueryException $e) {
+           return redirect()->to('user')->with('message_error', 'User ini tidak bisa dihapus karena masih memiliki data aset/riwayat yang terhubung. Hapus atau pindahkan dulu data terkaitnya, atau nonaktifkan user ini alih-alih menghapusnya.');
+        }
     }
 
 }

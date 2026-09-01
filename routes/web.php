@@ -14,16 +14,17 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $total_aset = \App\Models\AsetUmum::count();
+    $total_opd = \App\Models\RefOPD::count();
+    return view('welcome', compact('total_aset', 'total_opd'));
 });
+
 //Route::get('/form-aset', function () {
 //    return view('form-aset');
 //})->name('form-aset');
 
-Route::get('/form-aset',[App\Http\Controllers\AsetUmumController::class, 'formAset'])->name('form-aset');
-Route::post('/form-aset',[App\Http\Controllers\AsetUmumController::class, 'store'])->name('simpanAsetUmum');
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 //Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
 
@@ -63,7 +64,6 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
 	//Route::resource('user', App\Http\Controllers\UserController::class)->name('*', 'user');
-	Route::delete('/user/{id}', 'UserController@destroy');
 	
 	Route::get('/opd/export', 'App\Http\Controllers\OpdController@processExport')->name('opd.export');
 	Route::get('/opd/import', 'App\Http\Controllers\OpdController@import');
@@ -106,16 +106,22 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/vm/import', 'App\Http\Controllers\VmController@processImport')->name('vm.import');
 	Route::resource('vm', 'App\Http\Controllers\VmController', ['except' => ['show']]);
 	
+	// Form Aset Diskominfo (sekarang jadi modal di halaman Aset Umum)
+	Route::post('/form-aset',[App\Http\Controllers\AsetUmumController::class, 'store'])->name('simpanAsetUmum');
+	
 	Route::any('/aset-umum/detail/{id}', [App\Http\Controllers\AsetUmumController::class, 'detailAsetUmum'])->name('detailAsetUmum');
 	Route::any('/aset-umum/update/{id}', [App\Http\Controllers\AsetUmumController::class, 'updateAsetUmum'])->name('updateAsetUmum');
+	Route::get('/aset-umum/laporan', [App\Http\Controllers\AsetUmumController::class, 'cetakLaporan'])->name('aset-umum.laporan');
+	Route::get('/aset-umum/export', [App\Http\Controllers\AsetUmumController::class, 'processExport'])->name('aset-umum.export');
 	Route::resource('aset-umum', 'App\Http\Controllers\AsetUmumController', ['except' => ['show']]);
+	
+	// Data Pegawai (khusus admin, dicek juga di PegawaiController)
+	Route::resource('pegawai', 'App\Http\Controllers\PegawaiController', ['except' => ['show']]);
 	
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 });
 
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-

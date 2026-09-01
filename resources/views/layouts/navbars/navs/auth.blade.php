@@ -3,7 +3,7 @@
 <nav class="navbar navbar-expand-lg navbar-light  navbar-absolute fixed-top ">
   <div class="container-fluid">
     <div class="navbar-wrapper">
-      <a class="navbar-brand" href="#">{{ $titlePage }}</a>
+      <a class="navbar-brand" href="#">{{ $titlePage ?? '' }}</a>
     </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
     <span class="sr-only">Toggle navigation</span>
@@ -51,16 +51,10 @@
 		
         <li class="nav-item dropdown">
           <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <!--i class="material-icons">person</i-->
-			<lord-icon
-				src="https://cdn.lordicon.com/dxjqoygy.json"
-				trigger="loop"
-				colors="primary:#121331,secondary:#08a88a"
-				style="width:30px;height:30px">
-			</lord-icon>
-            <p class="d-lg-none d-md-block">
-              {{ __('Account') }}
-            </p>
+             <span class="navbar-avatar">{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}</span>
+             <p class="d-lg-none d-md-block">
+                {{ __('Account') }}
+             </p>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
             <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Profile') }}</a>
